@@ -1,0 +1,32 @@
+[
+  {
+    "Id": "cd34dcaf-cf47-4b34-a8de-2cd40fd65468",
+    "Name": "Rent/Mortgage",
+    "Description": "All payments to keep a roof over your head. ",
+    "ColorCode": "390099"
+  },
+  {
+    "Id": "83d27674-6f55-464f-bfa8-7a9a8d9a5268",
+    "Name": "Utilities",
+    "Description": "Water and Electricity",
+    "ColorCode": "9E0059"
+  },
+  {
+    "Id": "acdb5611-4364-4507-a103-0be55528ea4b",
+    "Name": "Travel",
+    "Description": "Money paid to get you from point a to point b. Eg. Fuel, Uber, Taxi Fare",
+    "ColorCode": "FF0054"
+  },
+  {
+    "Id": "d21a8e9d-6282-413e-b6b1-42afe397de6a",
+    "Name": "Food",
+    "Description": "Grocery shopping, quick takeouts when it's inconvienent",
+    "ColorCode": "FF5400"
+  },
+  {
+    "Id": "0e55e68f-c654-4cf6-9b98-b9c4e87de533",
+    "Name": "Entertainment",
+    "Description": "Money trown down the drain to keep you happy. Subscriptions, long nights out and other experiences",
+    "ColorCode": "FFBD00"
+  }
+]
