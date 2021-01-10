@@ -1,0 +1,49 @@
+﻿@model IEnumerable<FinanceTracker.Models.Expense>
+
+<h1>Expenses</h1>
+
+<a asp-action="Add"
+   asp-controller="Expense"
+   class="btn btn-primary">
+    Add New 
+</a>
+
+@if(Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.Amount</td>
+                    <td>@item.Date</td>
+                    <td>@item.CategoryId</td>
+                    <td>
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id">
+                            Delete
+                        </a>
+                        <br />
+                        <a asp-action="Edit"
+                           asp-route-id="@item.Id">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p> nothing to see here..</p>
+}

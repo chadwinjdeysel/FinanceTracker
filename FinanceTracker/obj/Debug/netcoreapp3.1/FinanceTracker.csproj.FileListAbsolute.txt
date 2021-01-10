@@ -128,3 +128,6 @@ C:\Projects\FinanceTracker\financetracker\obj\Debug\netcoreapp3.1\staticwebasset
 C:\Projects\FinanceTracker\financetracker\obj\Debug\netcoreapp3.1\FinanceTracker.dll
 C:\Projects\FinanceTracker\financetracker\obj\Debug\netcoreapp3.1\FinanceTracker.pdb
 C:\Projects\FinanceTracker\financetracker\obj\Debug\netcoreapp3.1\FinanceTracker.genruntimeconfig.cache
+C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Expense\Index.cshtml.g.cs
+C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Expense\Add.cshtml.g.cs
+C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Expense\Edit.cshtml.g.cs
