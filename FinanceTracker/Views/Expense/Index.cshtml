@@ -1,32 +1,122 @@
-﻿@model IEnumerable<FinanceTracker.Models.Expense>
+﻿@model FinanceTracker.ViewModels.ExpenseTableViewModel
 
+@{ 
+    var expenses = Model.Expenses;
+    var categories = Model.Categories;
+}
 <h1>Expenses</h1>
 
 <a asp-action="Add"
    asp-controller="Expense"
    class="btn btn-primary">
-    Add New 
+    Add New
 </a>
 
-@if(Model.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Amount</th>
-                <th>Date</th>
-                <th>Category</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @if (ViewData["OrderBy"].ToString() == "amount-ascending")
+                {
+                    <a asp-action="Index"
+                       asp-route-orderBy="amount-descending"
+                       asp-route-page="1"
+                       asp-route-pageSize="@Model.PageSize"
+                       asp-route-category="@Model.CategorySelected">
+                        Amount
+                        <span class="oi oi-sort-ascending"></span>
+                    </a>
+                }
+                else if (ViewData["OrderBy"].ToString() == "amount-descending")
+                {
+                    <a asp-action="Index"
+                       asp-route-orderBy="amount-ascending"
+                       asp-route-page="1"
+                       asp-route-pageSize="@Model.PageSize"
+                       asp-route-category="@Model.CategorySelected">
+                        Amount
+                        <span class="oi oi-sort-descending"></span>
+                    </a>
+                }
+                else
+                {
+                    <a asp-action="Index"
+                       asp-route-orderBy="amount-ascending"
+                       asp-route-page="1"
+                       asp-route-pageSize="@Model.PageSize"
+                       asp-route-category="@Model.CategorySelected">
+                        Amount
+                    </a>
+                }
 
+            </th>
+            <th>
+                @if (ViewData["OrderBy"].ToString() == "date-ascending")
+                {
+                    <a asp-action="Index"
+                       asp-route-orderBy="date-descending"
+                       asp-route-page="1"
+                       asp-route-pageSize="@Model.PageSize"
+                       asp-route-category="@Model.CategorySelected">
+                        Date
+                        <span class="oi oi-sort-ascending"></span>
+                    </a>
+                }
+                else if (ViewData["OrderBy"].ToString() == "date-descending")
+                {
+                    <a asp-action="Index"
+                       asp-route-orderBy="date-ascending"
+                       asp-route-page="1"
+                       asp-route-pageSize="@Model.PageSize"
+                       asp-route-category="@Model.CategorySelected">
+                        Date
+                        <span class="oi oi-sort-descending"></span>
+                    </a>
+                }
+                else
+                {
+                    <a asp-action="Index"
+                       asp-route-orderBy="date-ascending"
+                       asp-route-page="1"
+                       asp-route-pageSize="@Model.PageSize"
+                       asp-route-category="@Model.CategorySelected">
+                        Date
+                    </a>
+                }
+            </th>
+            <th>
+                <form asp-action="Index">
+                    <input type="hidden"
+                           asp-for="PageSize" />
+
+                    <select class="form-control"
+                            asp-for="CategorySelected"
+                            style="width: 175px"
+                            onchange="this.form.submit()">
+
+                        <option value="0">All Categories</option>
+                        @foreach (var item in categories)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+
+                    </select>
+
+                </form>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @if (expenses.Any())
+    {
         <tbody>
-            @foreach(var item in Model)
+            @foreach (var item in expenses)
             {
                 <tr>
                     <td>@item.Amount</td>
-                    <td>@item.Date</td>
-                    <td>@item.CategoryId</td>
+                    <td>@item.Date.ToShortDateString()</td>
+                    <td>@item.Category.Name</td>
                     <td>
                         <a asp-action="Delete"
                            asp-route-id="@item.Id">
@@ -41,9 +131,78 @@
                 </tr>
             }
         </tbody>
-    </table>
-}
-else
-{
-    <p> nothing to see here..</p>
-}
+    }
+    else
+    {
+        <tbody>
+            <tr>
+                <td>
+                    Nothing was found... <a asp-action="Index">refresh here</a>
+                </td>
+            </tr>
+        </tbody>
+    }
+
+</table>
+
+<div class="row justify-content-between mx-1">
+    @{
+        var prevDisabled = !expenses.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !expenses.HasNextPage ? "disabled" : "";
+
+    }
+
+<ul class="pagination">
+    <li class="page-item @prevDisabled">
+        <a class="page-link"
+           asp-action="Index"
+           asp-route-page="@(expenses.PageIndex - 1)"
+           asp-route-pageSize="@Model.PageSize"
+           asp-route-category="@Model.CategorySelected">
+            <
+        </a>
+    </li>
+
+
+    @for (int i = 1; i <= expenses.TotalPages; i++)
+    {
+        var currentPageActive = expenses.PageIndex == i ? "active" : "";
+        <li class="page-item @currentPageActive">
+            <a class="page-link "
+               asp-action="Index"
+               asp-route-page="@i"
+               asp-route-pageSize="@Model.PageSize"
+               asp-route-category="@Model.CategorySelected">
+                @i
+            </a>
+        </li>
+
+    }
+
+    <li class="page-item @nextDisabled">
+        <a class="page-link"
+           asp-action="Index"
+           asp-route-page="@(expenses.PageIndex + 1)"
+           asp-route-pageSize="@Model.PageSize"
+           asp-route-category="@Model.CategorySelected">
+            >
+        </a>
+    </li>
+</ul>
+
+<form asp-action="Index">
+    <input type="hidden"
+           asp-for="CategorySelected" />
+
+    <select asp-for="PageSize"
+            class="form-control"
+            style="width: 75px"
+            onchange="this.form.submit()">
+
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+    </select>
+
+</form>
+</div>

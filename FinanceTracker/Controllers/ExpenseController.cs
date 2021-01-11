@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FinanceTracker.Data;
+using FinanceTracker.Helpers;
 using FinanceTracker.Models;
 using FinanceTracker.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +19,38 @@ namespace FinanceTracker.Controllers
             this._repo = repo;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page, int? pageSize, string orderBy, Guid category)
         {
-            var model = await _repo.GetList<Expense>();
-            return View(model);
+            ExpenseParams @params = new ExpenseParams
+            {
+                PageNumber = page ?? 1,
+                PageSize = pageSize ?? 10,
+                OrderBy = orderBy,
+                CategoryId = category
+            };
+
+            var expenses = await _repo.GetPagedExpenses(@params);
+            
+            ViewData["OrderBy"] = orderBy == null ? "" : orderBy;
+
+            var viewModel = new ExpenseTableViewModel();
+            viewModel.Expenses = expenses;
+            viewModel.Categories = await _repo.GetList<Category>();
+            viewModel.CategorySelected = category;
+            viewModel.PageSize = @params.PageSize;
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Index(ExpenseTableViewModel model)
+        {
+            return RedirectToAction("Index", new 
+                { category = model.CategorySelected, 
+                page = 1, 
+                pageSize = model.PageSize ?? 10,
+                orderBy = "" 
+                });
         }
 
         [HttpGet]

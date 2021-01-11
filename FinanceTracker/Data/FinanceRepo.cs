@@ -49,19 +49,22 @@ namespace FinanceTracker.Data
                 .Include(x => x.Category)
                 .AsQueryable();
 
-            if (@params.CategoryId != null)
+            if (@params.CategoryId != Guid.Empty)
                 expenses = expenses.Where(c => c.CategoryId == @params.CategoryId).AsQueryable();
 
             switch (@params.OrderBy)
             {
-                case "dateacsending":
+                case "date-ascending":
                     expenses = expenses.OrderBy(d => d.Date);
                     break;
-                case "amountacsending":
+                case "amount-ascending":
                     expenses = expenses.OrderBy(a => a.Amount);
                     break;
-                case "amountdescending":
+                case "amount-descending":
                     expenses = expenses.OrderByDescending(a => a.Amount);
+                    break;
+                case "date-descending":
+                    expenses = expenses.OrderByDescending(d => d.Date);
                     break;
                 default:
                     expenses = expenses.OrderByDescending(d => d.Date);
