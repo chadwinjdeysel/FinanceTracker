@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FinanceTracker</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
@@ -11,7 +11,12 @@
 <body>
 
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Finance Tracker</a>
+        <a class="navbar-brand col-sm-3 col-md-2" href="#">Finance Tracker</a>
+
+        <span class="nav-item mr-auto text-light"
+              style="font-size: 175%">
+            @ViewData["Title"]
+        </span>
     </nav>
 
     <div class="container-fluid">

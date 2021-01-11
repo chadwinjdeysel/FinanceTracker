@@ -3,16 +3,16 @@
 @{ 
     var expenses = Model.Expenses;
     var categories = Model.Categories;
+    ViewData["Title"] = "Expenses";
+
 }
-<h1>Expenses</h1>
+    <a asp-action="Add"
+       asp-controller="Expense"
+       class="btn btn-primary my-3 ">
+        Add New Expense
+    </a>
 
-<a asp-action="Add"
-   asp-controller="Expense"
-   class="btn btn-primary">
-    Add New
-</a>
-
-<table class="table">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>
@@ -22,7 +22,8 @@
                        asp-route-orderBy="amount-descending"
                        asp-route-page="1"
                        asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected">
+                       asp-route-category="@Model.CategorySelected"
+                       class="text-dark">
                         Amount
                         <span class="oi oi-sort-ascending"></span>
                     </a>
@@ -33,7 +34,8 @@
                        asp-route-orderBy="amount-ascending"
                        asp-route-page="1"
                        asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected">
+                       asp-route-category="@Model.CategorySelected"
+                       class="text-dark">
                         Amount
                         <span class="oi oi-sort-descending"></span>
                     </a>
@@ -44,7 +46,8 @@
                        asp-route-orderBy="amount-ascending"
                        asp-route-page="1"
                        asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected">
+                       asp-route-category="@Model.CategorySelected"
+                       class="text-dark">
                         Amount
                     </a>
                 }
@@ -57,7 +60,8 @@
                        asp-route-orderBy="date-descending"
                        asp-route-page="1"
                        asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected">
+                       asp-route-category="@Model.CategorySelected"
+                       class="text-dark">
                         Date
                         <span class="oi oi-sort-ascending"></span>
                     </a>
@@ -68,7 +72,8 @@
                        asp-route-orderBy="date-ascending"
                        asp-route-page="1"
                        asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected">
+                       asp-route-category="@Model.CategorySelected"
+                       class="text-dark">
                         Date
                         <span class="oi oi-sort-descending"></span>
                     </a>
@@ -79,11 +84,13 @@
                        asp-route-orderBy="date-ascending"
                        asp-route-page="1"
                        asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected">
+                       asp-route-category="@Model.CategorySelected"
+                       class="text-dark">
                         Date
                     </a>
                 }
             </th>
+
             <th>
                 <form asp-action="Index">
                     <input type="hidden"
@@ -104,6 +111,7 @@
 
                 </form>
             </th>
+            <th>Description</th>
             <th></th>
         </tr>
     </thead>
@@ -117,16 +125,34 @@
                     <td>@item.Amount</td>
                     <td>@item.Date.ToShortDateString()</td>
                     <td>@item.Category.Name</td>
+                    <td>@item.Description</td>
                     <td>
-                        <a asp-action="Delete"
-                           asp-route-id="@item.Id">
-                            Delete
-                        </a>
-                        <br />
-                        <a asp-action="Edit"
-                           asp-route-id="@item.Id">
-                            Edit
-                        </a>
+                        <div class="dropdown dropleft">
+                            <a class="text-muted"
+                               href="#"
+                               role="button"
+                               id="dropdownMenu"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                <span class="oi oi-ellipses"></span>
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="dropdown-item">
+                                    Delete
+                                </a>
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="dropdown-item">
+                                    Edit
+                                </a>
+                            </div>
+                        </div>
+
+                        
                     </td>
                 </tr>
             }
