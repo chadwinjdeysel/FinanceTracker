@@ -1,0 +1,74 @@
+﻿@model IEnumerable<FinanceTracker.Models.Category>
+
+@{ 
+    ViewData["Title"] = "Categories";
+} 
+
+@section Styles{ 
+    <style>
+        .color-ball{
+            height: 20px;
+            width: 20px;
+            margin: 5px;
+            /*background-color: red;*/
+            border-radius: 50%
+        }
+
+        .text-larger{
+            font-size: 125%;
+        }
+    </style>
+} 
+
+<a asp-action="Add"
+   class="mb-3 btn btn-primary">
+    Add New Category
+</a>
+
+<div class="row">
+    @foreach(var item in Model)
+    {
+        <div class="col-3 p-3">
+            <div class="card h-100">
+                <div class="card-body">
+
+                    <div class="row justify-content-between mx-2">
+                        <div class="row">
+                            <div class="color-ball" style="background-color: @item.ColorCode"></div>
+
+                            <span class="text-larger">@item.Name</span>
+                        </div>
+
+                        <div class="dropdown dropleft">
+                            <a class="text-muted"
+                               href="#"
+                               role="button"
+                               id="dropdownMenu"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                <span class="oi oi-ellipses"></span>
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="dropdown-item">
+                                    Delete
+                                </a>
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="dropdown-item">
+                                    Edit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <small>@item.Description</small>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

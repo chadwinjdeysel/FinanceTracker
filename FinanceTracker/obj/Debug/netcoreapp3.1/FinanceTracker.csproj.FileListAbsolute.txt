@@ -132,3 +132,6 @@ C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Ex
 C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Expense\Add.cshtml.g.cs
 C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Expense\Edit.cshtml.g.cs
 C:\Projects\FinanceTracker\financetracker\bin\Debug\netcoreapp3.1\libman.json
+C:\Projects\FinanceTracker\financetracker\obj\Debug\netcoreapp3.1\Razor\Views\Category\Index.cshtml.g.cs
+C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Category\Add.cshtml.g.cs
+C:\Projects\FinanceTracker\financetracker\obj\Debug\netcoreapp3.1\Razor\Views\Category\Edit.cshtml.g.cs

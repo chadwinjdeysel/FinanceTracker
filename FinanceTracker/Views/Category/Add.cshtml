@@ -1,0 +1,34 @@
+﻿@model Category
+
+@{ 
+    ViewData["Title"] = "Add New Category";
+}
+
+<form method="post"
+      asp-action="Add">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name"
+               type="text"
+               class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" 
+                  class="form-control">
+        </textarea>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ColorCode"></label>
+        <input asp-for="ColorCode"
+               type="color"
+               class="form-control" />
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+        Add Category
+    </button>
+</form>

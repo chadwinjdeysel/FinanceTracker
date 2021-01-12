@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
+
+    @RenderSection("Styles", required: false)
 </head>
 <body>
 
@@ -41,6 +43,14 @@
                                asp-controller="Expense">
                                 Transactions
                             </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-action="Index"
+                               asp-controller="Category">
+                                Categories
+                            </a>
+
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
