@@ -1,0 +1,59 @@
+﻿@model FinanceTracker.Models.SavingsGoal
+
+@{
+    ViewData["Title"] = "Edit Savings Goal";
+}
+
+<form asp-action="Edit"
+      method="post">
+
+    <input type="hidden"
+           asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name"
+               type="text"
+               class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+
+        <textarea asp-for="Description"
+                  class="form-control">
+        </textarea>
+    </div>
+
+    <div class="custom-control custom-checkbox my-3">
+        <input asp-for="HasDeadline"
+               type="checkbox"
+               class="custom-control-input has-deadline" 
+               onchange="valueChanged()">
+        <label class="custom-control-label" asp-for="HasDeadline"></label>
+    </div>
+
+    @{ 
+        string visability = Model.HasDeadline ? "block" : "none";
+    }
+
+    <div class="form-group deadline" style="display: @visability">
+        <label asp-for="Deadline"></label>
+        <input asp-for="Deadline"
+               type="date"
+               class="form-control" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Edit Savings Goal</button>
+</form>
+
+@section Scripts{
+    <script>
+        function valueChanged() {
+            if ($('.has-deadline').is(":checked"))
+                $(".deadline").show();
+            else
+                $(".deadline").hide();
+        }
+    </script>
+}

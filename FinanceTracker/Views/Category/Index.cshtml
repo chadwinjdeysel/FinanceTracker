@@ -13,10 +13,6 @@
             /*background-color: red;*/
             border-radius: 50%
         }
-
-        .text-larger{
-            font-size: 125%;
-        }
     </style>
 } 
 
@@ -47,19 +43,19 @@
                                data-toggle="dropdown"
                                aria-haspopup="true"
                                aria-expanded="false">
-                                <span class="oi oi-ellipses"></span>
+                                <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                <a asp-action="Delete"
-                                   asp-route-id="@item.Id"
-                                   class="dropdown-item">
-                                    Delete
-                                </a>
                                 <a asp-action="Edit"
                                    asp-route-id="@item.Id"
                                    class="dropdown-item">
                                     Edit
+                                </a>
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="dropdown-item">
+                                    Delete
                                 </a>
                             </div>
                         </div>

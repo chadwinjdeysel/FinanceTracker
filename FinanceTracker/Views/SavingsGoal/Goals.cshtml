@@ -1,0 +1,77 @@
+﻿@model IEnumerable<FinanceTracker.Models.SavingsGoal>
+
+@{ 
+    ViewData["Title"] = "Savings Goals";
+}
+
+<a asp-action="Add"
+   class="btn btn-primary mb-3">
+    Add New Savings Goal
+</a>
+
+<div class="row">
+    @if (Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <div class="col-4">
+                <div class="card h-100">
+                    <div class="card-body">
+
+                        <div class="row mx-1 justify-content-between">
+                            <h4 class="card-title">@item.Name</h4>
+
+                            <div class="dropdown dropleft">
+                                <a class="text-muted"
+                                   href="#"
+                                   role="button"
+                                   id="dropdownMenu"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="dropdown-item">
+                                        Edit
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       class="dropdown-item">
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p>@item.Description</p>    
+
+                        @if (item.HasDeadline)
+                        {
+                            <small class="text-danger"><p>Deadline - @item.Deadline.ToShortDateString()</p></small>
+                        }
+
+                        <div class="progress">
+                            <div class="progress-bar" 
+                                 role="progressbar"
+                                 aria-valuenow="25"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 style="width: 25%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+    else
+    {
+        <p>Nothing was found..</p>
+    }
+</div>
