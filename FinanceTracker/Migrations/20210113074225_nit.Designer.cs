@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceTracker.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210107140257_init")]
-    partial class init
+    [Migration("20210113074225_nit")]
+    partial class nit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,6 +100,9 @@ namespace FinanceTracker.Migrations
                     b.Property<Guid>("SavingsGoalId")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SavingsGoalId");
@@ -112,6 +115,9 @@ namespace FinanceTracker.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("REAL");
 
                     b.Property<DateTime>("Deadline")
                         .HasColumnType("TEXT");
@@ -126,6 +132,7 @@ namespace FinanceTracker.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

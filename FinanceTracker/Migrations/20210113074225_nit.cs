@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinanceTracker.Migrations
 {
-    public partial class init : Migration
+    public partial class nit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,7 +26,8 @@ namespace FinanceTracker.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    Amount = table.Column<float>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     HasDeadline = table.Column<bool>(nullable: false),
                     Deadline = table.Column<DateTime>(nullable: false),
@@ -85,7 +86,8 @@ namespace FinanceTracker.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     SavingsGoalId = table.Column<Guid>(nullable: false),
                     Amount = table.Column<float>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: false),
+                    Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

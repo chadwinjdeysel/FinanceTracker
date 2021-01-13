@@ -22,6 +22,23 @@ namespace FinanceTracker.Data
             _context.Add(entity);
         }
 
+        public async Task<float> CalculateProgress(SavingsGoal goal)
+        {
+            var savings = await _context.Savings
+                .Where(x => x.SavingsGoalId == goal.Id)
+                .ToListAsync();
+
+            float totalAdditions = savings.Where(x => x.Type == Models.Type.Addition)
+                .Select(x => x.Amount)
+                .Sum();
+
+            float totalSubtractions = savings.Where(x => x.Type == Models.Type.Subtraction)
+                .Select(x => x.Amount)
+                .Sum();
+
+            return (totalAdditions - totalSubtractions) / goal.Amount * 100;
+        }
+
         public void Delete<T>(T entity) where T : class
         {
             if (entity != null)
@@ -36,6 +53,14 @@ namespace FinanceTracker.Data
         public async Task<T> Find<T>(Guid id) where T : class
         {
             return await _context.Set<T>().FindAsync(id);
+        }
+
+        public async Task<SavingsGoal> GetGoal(Guid id)
+        {
+            return await _context.SavingsGoals
+                .Where(x => x.Id == id)
+                .Include(x => x.Savings) 
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<T>> GetList<T>() where T : class

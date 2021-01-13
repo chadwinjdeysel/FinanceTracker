@@ -15,5 +15,13 @@ namespace FinanceTracker.Models
         public float Amount { get; set; }
         public DateTime Date { get; set; }
 
+        public Type Type { get; set; }
+
+    }
+
+    public enum Type
+    {
+        Addition,
+        Subtraction
     }
 }

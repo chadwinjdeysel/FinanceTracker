@@ -1,7 +1,8 @@
-﻿@model IEnumerable<FinanceTracker.Models.SavingsGoal>
+﻿@model IEnumerable<SavingsGoalProgressViewModel>
 
 @{ 
     ViewData["Title"] = "Savings Goals";
+
 }
 
 <a asp-action="Add"
@@ -10,7 +11,7 @@
 </a>
 
 <div class="row">
-    @if (Model.Any())
+    @if (Model.Any()) 
     {
         @foreach (var item in Model)
         {
@@ -18,8 +19,9 @@
                 <div class="card h-100">
                     <div class="card-body">
 
-                        <div class="row mx-1 justify-content-between">
-                            <h4 class="card-title">@item.Name</h4>
+                        <div class="row justify-content-between">
+
+                            <h4 class="card-title col-11">@item.SavingsGoal.Name</h4>
 
                             <div class="dropdown dropleft">
                                 <a class="text-muted"
@@ -32,15 +34,22 @@
                                     <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                <div class="dropdown-menu col-1" aria-labelledby="dropdownMenu">
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.SavingsGoal.Id"
+                                       class="dropdown-item">
+                                        View Progress
+                                    </a>
+
+                                    <div class="dropdown-divider"></div>
                                     <a asp-action="Edit"
-                                       asp-route-id="@item.Id"
+                                       asp-route-id="@item.SavingsGoal.Id"
                                        class="dropdown-item">
                                         Edit
                                     </a>
 
                                     <a asp-action="Delete"
-                                       asp-route-id="@item.Id"
+                                       asp-route-id="@item.SavingsGoal.Id"
                                        class="dropdown-item">
                                         Delete
                                     </a>
@@ -48,20 +57,21 @@
                             </div>
                         </div>
                         
-                        <p>@item.Description</p>    
+                        <h5>R @item.SavingsGoal.Amount</h5>
+                        <p>@item.SavingsGoal.Description</p>    
 
-                        @if (item.HasDeadline)
+                        @if (item.SavingsGoal.HasDeadline)
                         {
-                            <small class="text-danger"><p>Deadline - @item.Deadline.ToShortDateString()</p></small>
+                            <small class="text-danger"><p>Deadline - @item.SavingsGoal.Deadline.ToShortDateString()</p></small>
                         }
 
                         <div class="progress">
                             <div class="progress-bar" 
                                  role="progressbar"
-                                 aria-valuenow="25"
+                                 aria-valuenow="@item.Progress"
                                  aria-valuemin="0"
                                  aria-valuemax="100"
-                                 style="width: 25%">
+                                 style="width: @item.Progress%">
                             </div>
                         </div>
                     </div>

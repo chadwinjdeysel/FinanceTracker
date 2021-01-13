@@ -22,6 +22,10 @@ namespace FinanceTracker.Data
 
         protected override void OnModelCreating(ModelBuilder builder) 
         {
+            builder.Entity<Saving>()
+                .Property(x => x.Type)
+                .HasConversion<int>();
+
             base.OnModelCreating(builder);
         } 
     }

@@ -11,7 +11,10 @@ namespace FinanceTracker.Models
         public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
+        [Required]
+        public float Amount { get; set; }
         public string Description { get; set; }
+        [Display(Name = "This goal has a deadline")]
         public bool HasDeadline { get; set; }
         public DateTime Deadline { get; set; }
         public string ImagePath { get; set; }

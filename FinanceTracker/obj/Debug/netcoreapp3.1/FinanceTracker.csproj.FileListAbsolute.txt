@@ -138,3 +138,6 @@ C:\Projects\FinanceTracker\financetracker\obj\Debug\netcoreapp3.1\Razor\Views\Ca
 C:\Projects\FinanceTracker\financetracker\obj\Debug\netcoreapp3.1\Razor\Views\SavingsGoal\Goals.cshtml.g.cs
 C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\SavingsGoal\Add.cshtml.g.cs
 C:\Projects\FinanceTracker\financetracker\obj\Debug\netcoreapp3.1\Razor\Views\SavingsGoal\Edit.cshtml.g.cs
+C:\Projects\FinanceTracker\financetracker\obj\Debug\netcoreapp3.1\Razor\Views\SavingsGoal\Details.cshtml.g.cs
+C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Savings\Add.cshtml.g.cs
+C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Savings\Edit.cshtml.g.cs
