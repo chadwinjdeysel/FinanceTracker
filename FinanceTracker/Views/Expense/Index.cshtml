@@ -139,15 +139,16 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                <a asp-action="Delete"
-                                   asp-route-id="@item.Id"
-                                   class="dropdown-item">
-                                    Delete
-                                </a>
                                 <a asp-action="Edit"
                                    asp-route-id="@item.Id"
                                    class="dropdown-item">
                                     Edit
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="dropdown-item">
+                                    Delete
                                 </a>
                             </div>
                         </div>
@@ -161,7 +162,30 @@
         <tbody>
             <tr>
                 <td>
-                    Nothing was found... <a asp-action="Index">refresh here</a>
+                    No expenses were found :(
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <div class="dropdown dropleft">
+                        <a class="text-muted"
+                           href="#"
+                           role="button"
+                           id="dropdownMenu"
+                           data-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            <span class="oi oi-ellipses"></span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                            <a asp-action="add"
+                               class="dropdown-item">
+                                Add new transaction
+                            </a>
+                        </div>
+                    </div>
                 </td>
             </tr>
         </tbody>
@@ -169,58 +193,59 @@
 
 </table>
 
-<div class="row justify-content-between mx-1">
+<div class="row justify-content-between">
     @{
         var prevDisabled = !expenses.HasPreviousPage ? "disabled" : "";
         var nextDisabled = !expenses.HasNextPage ? "disabled" : "";
 
     }
 
-<ul class="pagination">
-    <li class="page-item @prevDisabled">
-        <a class="page-link"
-           asp-action="Index"
-           asp-route-page="@(expenses.PageIndex - 1)"
-           asp-route-pageSize="@Model.PageSize"
-           asp-route-category="@Model.CategorySelected">
-            <
-        </a>
-    </li>
+    <div class="col-11">
+        <ul class="pagination">
+            <li class="page-item @prevDisabled">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@(expenses.PageIndex - 1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-category="@Model.CategorySelected">
+                    <
+                </a>
+            </li>
 
 
-    @for (int i = 1; i <= expenses.TotalPages; i++)
-    {
-        var currentPageActive = expenses.PageIndex == i ? "active" : "";
-        <li class="page-item @currentPageActive">
-            <a class="page-link "
-               asp-action="Index"
-               asp-route-page="@i"
-               asp-route-pageSize="@Model.PageSize"
-               asp-route-category="@Model.CategorySelected">
-                @i
-            </a>
-        </li>
+            @for (int i = 1; i <= expenses.TotalPages; i++)
+            {
+                var currentPageActive = expenses.PageIndex == i ? "active" : "";
+                <li class="page-item @currentPageActive">
+                    <a class="page-link "
+                       asp-action="Index"
+                       asp-route-page="@i"
+                       asp-route-pageSize="@Model.PageSize"
+                       asp-route-category="@Model.CategorySelected">
+                        @i
+                    </a>
+                </li>
 
-    }
+            }
 
-    <li class="page-item @nextDisabled">
-        <a class="page-link"
-           asp-action="Index"
-           asp-route-page="@(expenses.PageIndex + 1)"
-           asp-route-pageSize="@Model.PageSize"
-           asp-route-category="@Model.CategorySelected">
-            >
-        </a>
-    </li>
-</ul>
+            <li class="page-item @nextDisabled">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@(expenses.PageIndex + 1)"
+                   asp-route-pageSize="@Model.PageSize"
+                   asp-route-category="@Model.CategorySelected">
+                    >
+                </a>
+            </li>
+        </ul>
+    </div>
 
-<form asp-action="Index">
+<form asp-action="Index" class="col-1">
     <input type="hidden"
            asp-for="CategorySelected" />
 
     <select asp-for="PageSize"
             class="form-control"
-            style="width: 75px"
             onchange="this.form.submit()">
 
         <option value="5">5</option>

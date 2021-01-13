@@ -9,25 +9,28 @@
 
     <input type="hidden" asp-for="Id" />
 
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name"
-               type="text"
-               class="form-control" />
-    </div>
+    <div class="row">
+        <div class="form-group col-6">
+            <label asp-for="Name"></label>
+            <input asp-for="Name"
+                   type="text"
+                   class="form-control" />
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description"
-                  class="form-control">
+        <div class="form-group col-1">
+            <label asp-for="ColorCode"></label>
+            <input asp-for="ColorCode"
+                   type="color"
+                   class="form-control" />
+        </div>
+
+
+        <div class="form-group col-6">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description"
+                      class="form-control">
         </textarea>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="ColorCode"></label>
-        <input asp-for="ColorCode"
-               type="color"
-               class="form-control" />
+        </div>
     </div>
 
     <button type="submit"
