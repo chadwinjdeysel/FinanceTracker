@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Add Budget";
+}
+
+@section Styles{
+    <style>
+        .color-ball {
+            height: 20px;
+            width: 20px;
+            margin: 5px;
+            border-radius: 50%
+        }
+    </style>
+}
+
+<form asp-action="Add"
+      method="post">
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+
+            <div class="form-group col-6">
+                <label>
+                    <div class="row justify-content-around">
+                        <div class="color-ball" style="background-color: @item.ColorCode"></div>
+                        @item.Name
+                    </div>
+                </label>
+
+                <input class="form-control"
+                       name="@item.Id"
+                       type="text" />
+            </div>
+
+        }
+    </div>
+
+    <button class="btn btn-primary"
+            type="submit">
+        Create Budget
+    </button>
+
+</form>

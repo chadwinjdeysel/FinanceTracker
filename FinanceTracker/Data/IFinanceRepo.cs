@@ -21,8 +21,12 @@ namespace FinanceTracker.Data
         // expenses
         Task<PaginatedList<Expense>> GetPagedExpenses(ExpenseParams @params);
 
-        // savings
+        // savings tracker
         Task<float> CalculateProgress(SavingsGoal goal);
         Task<SavingsGoal> GetGoal(Guid id);
+
+        // budget manager
+        Task<IEnumerable<BudgetCategoryMapper>> GetBudget();
+        Task<Dictionary<Guid, float>> GetTotalsForBudget();
     }
 }

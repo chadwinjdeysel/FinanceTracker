@@ -22,20 +22,30 @@ namespace FinanceTracker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("Period")
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("ProjectedAmount")
+                    b.HasKey("Id");
+
+                    b.ToTable("Budgets");
+                });
+
+            modelBuilder.Entity("FinanceTracker.Models.BudgetCategoryMapper", b =>
+                {
+                    b.Property<Guid>("BudgetId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("Amount")
                         .HasColumnType("REAL");
 
-                    b.HasKey("Id");
+                    b.HasKey("BudgetId", "CategoryId");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Budgets");
+                    b.ToTable("BudgetCategoryMappers");
                 });
 
             modelBuilder.Entity("FinanceTracker.Models.Category", b =>
@@ -51,6 +61,7 @@ namespace FinanceTracker.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -138,10 +149,16 @@ namespace FinanceTracker.Migrations
                     b.ToTable("SavingsGoals");
                 });
 
-            modelBuilder.Entity("FinanceTracker.Models.Budget", b =>
+            modelBuilder.Entity("FinanceTracker.Models.BudgetCategoryMapper", b =>
                 {
+                    b.HasOne("FinanceTracker.Models.Budget", "Budget")
+                        .WithMany("Mapper")
+                        .HasForeignKey("BudgetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("FinanceTracker.Models.Category", "Category")
-                        .WithMany("Budgets")
+                        .WithMany("Mapper")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -3,16 +3,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinanceTracker.Migrations
 {
-    public partial class nit : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Budgets",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Period = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Budgets", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     ColorCode = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
                 },
@@ -39,19 +51,24 @@ namespace FinanceTracker.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Budgets",
+                name: "BudgetCategoryMappers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    BudgetId = table.Column<Guid>(nullable: false),
                     CategoryId = table.Column<Guid>(nullable: false),
-                    ProjectedAmount = table.Column<float>(nullable: false),
-                    Period = table.Column<DateTime>(nullable: false)
+                    Amount = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Budgets", x => x.Id);
+                    table.PrimaryKey("PK_BudgetCategoryMappers", x => new { x.BudgetId, x.CategoryId });
                     table.ForeignKey(
-                        name: "FK_Budgets_Categories_CategoryId",
+                        name: "FK_BudgetCategoryMappers_Budgets_BudgetId",
+                        column: x => x.BudgetId,
+                        principalTable: "Budgets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BudgetCategoryMappers_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
@@ -101,8 +118,8 @@ namespace FinanceTracker.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Budgets_CategoryId",
-                table: "Budgets",
+                name: "IX_BudgetCategoryMappers_CategoryId",
+                table: "BudgetCategoryMappers",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
@@ -119,13 +136,16 @@ namespace FinanceTracker.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Budgets");
+                name: "BudgetCategoryMappers");
 
             migrationBuilder.DropTable(
                 name: "Expenses");
 
             migrationBuilder.DropTable(
                 name: "Savings");
+
+            migrationBuilder.DropTable(
+                name: "Budgets");
 
             migrationBuilder.DropTable(
                 name: "Categories");

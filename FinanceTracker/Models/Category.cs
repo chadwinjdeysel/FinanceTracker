@@ -16,8 +16,9 @@ namespace FinanceTracker.Models
         public string ColorCode { get; set; }
         public string Description { get; set; }
 
-        public IEnumerable<Expense> Expenses { get; set; }
-        public IEnumerable<Budget> Budgets { get; set; }
+        public virtual IEnumerable<Expense> Expenses { get; set; }
+
+        public virtual IEnumerable<BudgetCategoryMapper> Mapper { get; set; }
 
     }
 }

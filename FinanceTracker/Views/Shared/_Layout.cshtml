@@ -28,12 +28,14 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" href="#">
-                                DA BOYZ
+                                -
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link"
+                               asp-action="Index"
+                               asp-controller="Home">
                                 Dashboard
                             </a>
                         </li>
@@ -41,7 +43,21 @@
                             <a class="nav-link"
                                asp-action="Index"
                                asp-controller="Expense">
-                                Transactions
+                                Expenses
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-action="Index"
+                               asp-controller="Budget">
+                                Budget Manager
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="SavingsGoal"
+                               asp-action="Goals">
+                                Savings Tracker
                             </a>
                         </li>
                         <li class="nav-item">
@@ -49,14 +65,6 @@
                                asp-action="Index"
                                asp-controller="Category">
                                 Categories
-                            </a>
-
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"
-                               asp-controller="SavingsGoal"
-                               asp-action="Goals">
-                                Savings
                             </a>
                         </li>
                     </ul>

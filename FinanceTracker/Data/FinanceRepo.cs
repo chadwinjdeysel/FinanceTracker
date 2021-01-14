@@ -55,6 +55,17 @@ namespace FinanceTracker.Data
             return await _context.Set<T>().FindAsync(id);
         }
 
+        public async Task<IEnumerable<BudgetCategoryMapper>> GetBudget()
+        {
+            var budget = await _context.BudgetCategoryMappers
+                .Where(x => x.Budget.Period.Month == DateTime.Now.Month)
+                .Include(x => x.Budget)
+                .Include(x => x.Category)
+                .ToListAsync();
+
+            return budget;
+        }
+
         public async Task<SavingsGoal> GetGoal(Guid id)
         {
             return await _context.SavingsGoals
@@ -97,6 +108,29 @@ namespace FinanceTracker.Data
             }
 
             return await PaginatedList<Expense>.CreateAsync(expenses.AsNoTracking(), @params.PageNumber, @params.PageSize);
+        }
+
+        public  async Task<Dictionary<Guid, float>> GetTotalsForBudget()
+        {
+            var expenses = await _context.Expenses
+                .Where(x => x.Date.Month == DateTime.Now.Month)
+                .ToListAsync();
+
+            var categories = await _context.Categories
+                .ToListAsync();
+
+            var totalsForBudget = new Dictionary<Guid, float>();
+
+            foreach(var item in categories)
+            {
+                float totals = expenses.Where(x => x.CategoryId == item.Id)
+                    .Select(x => x.Amount)
+                    .Sum();
+
+                totalsForBudget.Add(item.Id, totals > 0 ? totals : 0);
+            }
+
+            return totalsForBudget;
         }
 
         public async Task<bool> SaveAll()
