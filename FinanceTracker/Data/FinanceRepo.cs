@@ -22,6 +22,17 @@ namespace FinanceTracker.Data
             _context.Add(entity);
         }
 
+        public async Task<bool> BudgetMapExists(Guid budgetId, Guid categoryId)
+        {
+            bool budgetForCategoryExists = await _context.BudgetCategoryMappers
+                .Where(x => x.Budget.Period.Month == DateTime.Now.Month &&
+                x.CategoryId == categoryId &&
+                x.BudgetId == budgetId)
+                .AnyAsync();
+
+            return budgetForCategoryExists;
+        }
+
         public async Task<float> CalculateProgress(SavingsGoal goal)
         {
             var savings = await _context.Savings

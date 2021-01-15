@@ -28,5 +28,6 @@ namespace FinanceTracker.Data
         // budget manager
         Task<IEnumerable<BudgetCategoryMapper>> GetBudget();
         Task<Dictionary<Guid, float>> GetTotalsForBudget();
-    }
+        Task<bool> BudgetMapExists(Guid budgetId, Guid categoryId);
+    } 
 }

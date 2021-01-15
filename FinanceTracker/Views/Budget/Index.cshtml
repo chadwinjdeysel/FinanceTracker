@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Budget Manager";
+    var budgetId = Model.Budget.Select(x => x.BudgetId).FirstOrDefault();
 }
 
 @section Styles{
@@ -17,6 +18,7 @@
 
 @if (Model.Budget.Any())
 {
+    
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -24,63 +26,92 @@
                 <th>Budgeted Price</th>
                 <th>This month so far</th>
                 <th>Difference</th>
-                <th></th>
+                <th>
+                    <div class="dropdown dropleft">
+                        <a class="text-muted"
+                           href="#"
+                           role="button"
+                           id="dropdownMenu"
+                           data-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                            <a asp-action="Edit"
+                               asp-route-id="@budgetId"
+                               class="dropdown-item">
+                               Edit this Budget
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@budgetId"
+                               class="dropdown-item">
+                                Delete this budget
+                            </a>
+                        </div>
+                    </div>
+                </th>
             </tr>
         </thead>
 
         <tbody>
             @foreach (var item in Model.Budget)
             {
-                <tr>
-                    <td>
-                        <div class="row col-12">
-                            <div class="color-ball" style="background-color: @item.Category.ColorCode"></div>
-                            @item.Category.Name
-                        </div>
-                    </td>
-                    <td>@item.Amount</td>
-                    <td>@Model.TotalForTheMonth[item.CategoryId]</td>
-
-                    @{
-                        float difference = (item.Amount - Model.TotalForTheMonth[item.CategoryId]) * -1;
-
-                        string text = difference <= 0 ? "text-primary" : "text-danger";
-
-                        if(difference == 0)
-                        {
-                            difference = 0;
-                            text = "text-danger";
-                        }
-                    }
-
-                    <td>
-                        <div class="@text">
-                            @difference
-                        </div> 
-                    </td>
-                    <td>
-                        <div class="dropdown dropleft">
-                            <a class="text-muted"
-                               href="#"
-                               role="button"
-                               id="dropdownMenu"
-                               data-toggle="dropdown"
-                               aria-haspopup="true"
-                               aria-expanded="false">
-                                <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
-                            </a>
-
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                <a asp-action="Index"
-                                   asp-controller="Expense"
-                                   asp-route-category="@item.CategoryId"
-                                   class="dropdown-item">
-                                    View Expenses
-                                </a>
+                @if (item.Amount > 0)
+                {
+                    <tr>
+                        <td>
+                            <div class="row col-12">
+                                <div class="color-ball" style="background-color: @item.Category.ColorCode"></div>
+                                @item.Category.Name
                             </div>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                        <td>@item.Amount</td>
+                        <td>@Model.TotalForTheMonth[item.CategoryId]</td>
+
+                        @{
+                            float difference = (item.Amount - Model.TotalForTheMonth[item.CategoryId]) * -1;
+
+                            string text = difference <= 0 ? "text-primary" : "text-danger";
+
+                            if (difference == 0)
+                            {
+                                difference = 0;
+                                text = "text-danger";
+                            }
+                        }
+
+                        <td>
+                            <div class="@text">
+                                @difference
+                            </div>
+                        </td>
+                        <td>
+                            <div class="dropdown dropleft">
+                                <a class="text-muted"
+                                   href="#"
+                                   role="button"
+                                   id="dropdownMenu"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                    <a asp-action="Index"
+                                       asp-controller="Expense"
+                                       asp-route-category="@item.CategoryId"
+                                       class="dropdown-item">
+                                        View Expenses
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
