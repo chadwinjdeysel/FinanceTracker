@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qPJOAQLttcEXsrDn0fKi4ep6kVEYR7uG7Y/JOArU7E/F7V3wZs1oN3cMcXdhUqHVTxJybBvauOeqkfcNG2XfmQ==",
+  "dgSpecHash": "CoXZ69PY2ezb44z0lDlpJWFW5Hd9oae2Xd4F1+t+LoFrEPoroLYp0LXzhZNJ3o0H9Byfe3pP/tePZolVxsSPzQ==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\FinanceTracker\\financetracker\\FinanceTracker.csproj",
+  "projectFilePath": "C:\\Projects\\FinanceTracker\\FinanceTracker\\FinanceTracker.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chadw\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\chadw\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

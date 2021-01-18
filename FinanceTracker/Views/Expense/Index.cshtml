@@ -1,16 +1,32 @@
 ﻿@model FinanceTracker.ViewModels.ExpenseTableViewModel
 
-@{ 
+@{
     var expenses = Model.Expenses;
     var categories = Model.Categories;
     ViewData["Title"] = "Expenses";
 
 }
-    <a asp-action="Add"
-       asp-controller="Expense"
-       class="btn btn-primary my-3 ">
-        Add New Expense
-    </a>
+
+@section Styles{
+    <style>
+        .color-ball {
+            height: 20px;
+            width: 20px;
+            margin: 5px;
+            border-radius: 50%
+        }
+
+        .text-larger{
+            font-size: 125%;
+        }
+    </style>
+}
+
+<a asp-action="Add"
+   asp-controller="Expense"
+   class="btn btn-primary my-3 ">
+    Add New Expense
+</a>
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -116,11 +132,16 @@
         </tr>
     </thead>
 
+
     @if (expenses.Any())
     {
+
         <tbody>
             @foreach (var item in expenses)
             {
+
+                string modalName = "a" + item.Id.ToString() + "Modal";
+
                 <tr>
                     <td>@item.Amount</td>
                     <td>@item.Date.ToShortDateString()</td>
@@ -145,8 +166,10 @@
                                     Edit
                                 </a>
 
-                                <a asp-action="Delete"
-                                   asp-route-id="@item.Id"
+                                <a href="#"
+                                   role="button"
+                                   data-toggle="modal"
+                                   data-target="#@modalName"
                                    class="dropdown-item">
                                     Delete
                                 </a>
@@ -154,6 +177,52 @@
                         </div>
                     </td>
                 </tr>
+
+                <div class="modal fade" 
+                     id="@modalName" 
+                     tabindex="-1" 
+                     role="dialog" 
+                     aria-labelledby="@modalName" 
+                     aria-hidden="true">
+
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete this expense?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span class="text-larger">R @item.Amount</span>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="row justify-content-end mx-1">
+                                            <span class="text-larger">@item.Category.Name</span>
+                                            <div class="color-ball" style="background-color: @item.Category.ColorCode"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <span>@item.Description</span>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-danger">
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             }
         </tbody>
     }
@@ -240,18 +309,18 @@
         </ul>
     </div>
 
-<form asp-action="Index" class="col-1">
-    <input type="hidden"
-           asp-for="CategorySelected" />
+    <form asp-action="Index" class="col-1">
+        <input type="hidden"
+               asp-for="CategorySelected" />
 
-    <select asp-for="PageSize"
-            class="form-control"
-            onchange="this.form.submit()">
+        <select asp-for="PageSize"
+                class="form-control"
+                onchange="this.form.submit()">
 
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="15">15</option>
-    </select>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+        </select>
 
-</form>
+    </form>
 </div>

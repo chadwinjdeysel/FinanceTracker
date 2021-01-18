@@ -21,8 +21,10 @@
 </a>
 
 <div class="row">
-    @foreach(var item in Model)
+    @foreach (var item in Model)
     {
+        string modalName = "a" + item.Id.ToString() + "Modal";
+
         <div class="col-3 p-3">
             <div class="card h-100">
                 <div class="card-body">
@@ -51,8 +53,11 @@
                                    class="dropdown-item">
                                     Edit
                                 </a>
-                                <a asp-action="Delete"
-                                   asp-route-id="@item.Id"
+
+                                <a href="#"
+                                   role="button"
+                                   data-toggle="modal"
+                                   data-target="#@modalName"
                                    class="dropdown-item">
                                     Delete
                                 </a>
@@ -62,6 +67,46 @@
 
                     <small>@item.Description</small>
 
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade"
+             id="@modalName"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="@modalName"
+             aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete this category?</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row mx-1">
+                            <div class="color-ball" style="background-color: @item.ColorCode"></div>
+                            <span class="text-larger">@item.Name</span>
+                        </div>
+
+                        <p>@item.Description</p> 
+
+                        <p class="text-danger"><small>* by deleting this category, you will delete ALL expenses related to this category.</small></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           class="btn btn-danger">
+                            Delete
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

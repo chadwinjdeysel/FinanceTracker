@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\FinanceTracker\\financetracker\\FinanceTracker.csproj": {}
+    "C:\\Projects\\FinanceTracker\\FinanceTracker\\FinanceTracker.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\FinanceTracker\\financetracker\\FinanceTracker.csproj": {
+    "C:\\Projects\\FinanceTracker\\FinanceTracker\\FinanceTracker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\FinanceTracker\\financetracker\\FinanceTracker.csproj",
+        "projectUniqueName": "C:\\Projects\\FinanceTracker\\FinanceTracker\\FinanceTracker.csproj",
         "projectName": "FinanceTracker",
-        "projectPath": "C:\\Projects\\FinanceTracker\\financetracker\\FinanceTracker.csproj",
+        "projectPath": "C:\\Projects\\FinanceTracker\\FinanceTracker\\FinanceTracker.csproj",
         "packagesPath": "C:\\Users\\chadw\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\FinanceTracker\\financetracker\\obj\\",
+        "outputPath": "C:\\Projects\\FinanceTracker\\FinanceTracker\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

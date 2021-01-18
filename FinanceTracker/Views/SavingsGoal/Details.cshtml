@@ -66,56 +66,96 @@
 
     @if (Model.SavingsGoal.Savings.Any())
     {
-        <tbody>
-            @foreach (var item in Model.SavingsGoal.Savings)
-            {
-            <tr>
-                <td>@item.Date.ToShortDateString()</td>
-                @{ 
-                    var type = item.Type == FinanceTracker.Models.Type.Addition ? "text-primary" : "text-danger";
-                    var symbol = item.Type == FinanceTracker.Models.Type.Addition ? "+" : "-";
-                }
+<tbody>
+    @foreach (var item in Model.SavingsGoal.Savings)
+    {
+        string modalName = "a" + item.Id.ToString() + "Modal";
 
-                <td class="@type">
-                    @item.Type
-                </td>
+        <tr>
+            <td>@item.Date.ToShortDateString()</td>
+            @{
+                var type = item.Type == FinanceTracker.Models.Type.Addition ? "text-primary" : "text-danger";
+                var symbol = item.Type == FinanceTracker.Models.Type.Addition ? "+" : "-";
+            }
 
-                <td class="@type">
-                    @symbol R @item.Amount 
-                </td>
+            <td class="@type">
+                @item.Type
+            </td>
 
-                <td>
-                    <div class="dropdown dropleft">
-                        <a class="text-muted"
-                           href="#"
-                           role="button"
-                           id="dropdownMenu"
-                           data-toggle="dropdown"
-                           aria-haspopup="true"
-                           aria-expanded="false">
-                            <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+            <td class="@type">
+                @symbol R @item.Amount
+            </td>
+
+            <td>
+                <div class="dropdown dropleft">
+                    <a class="text-muted"
+                       href="#"
+                       role="button"
+                       id="dropdownMenu"
+                       data-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">
+                        <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        <a asp-action="Edit"
+                           asp-controller="Savings"
+                           asp-route-id="@item.Id"
+                           class="dropdown-item">
+                            Edit
                         </a>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                            <a asp-action="Edit"
-                               asp-controller="Savings"
-                               asp-route-id="@item.Id"
-                               class="dropdown-item">
-                                Edit
-                            </a>
+                        <a href="#"
+                           role="button"
+                           data-toggle="modal"
+                           data-target="#@modalName"
+                           class="dropdown-item">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </td>
+        </tr>
 
-                            <a asp-action="Delete"
-                               asp-controller="Savings"
-                               asp-route-id="@item.Id"
-                               class="dropdown-item">
-                                Delete
-                            </a>
+        <div class="modal fade"
+             id="@modalName"
+             tabindex="-1"
+             role="dialog"
+             aria-labelledby="@modalName"
+             aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete this savings transaction?</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row justify-content-between col-12">
+                            <h4>@item.Amount</h4>
+                            <h4>@item.Type.ToString()</h4>
                         </div>
                     </div>
-                </td>
-            </tr>
-        }
-        </tbody>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                        <a asp-action="Delete"
+                           asp-controller="Savings"
+                           asp-route-id="@item.Id"
+                           class="btn btn-danger">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</tbody>
        
     }
     else

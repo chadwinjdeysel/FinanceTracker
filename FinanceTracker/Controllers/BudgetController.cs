@@ -55,7 +55,7 @@ namespace FinanceTracker.Controllers
                     { 
                         BudgetId = budget.Id,
                         CategoryId = Guid.Parse(item.ToString()),
-                        Amount = float.Parse(model[item].ToString())
+                        Amount = model[item].ToString() == "" ? 0 : float.Parse(model[item].ToString())
                     };
 
                     _repo.Add<BudgetCategoryMapper>(mapper);
@@ -100,11 +100,12 @@ namespace FinanceTracker.Controllers
             {
                 if(item != "__RequestVerificationToken" && item != "BudgetId")
                 {
-                    var mapper = new BudgetCategoryMapper();
-
-                    mapper.BudgetId = Guid.Parse(model["BudgetId"].ToString());
-                    mapper.CategoryId = Guid.Parse(item.ToString());
-                    mapper.Amount = float.Parse(model[item].ToString());
+                    var mapper = new BudgetCategoryMapper() 
+                    {
+                        BudgetId = Guid.Parse(model["BudgetId"].ToString()),
+                        CategoryId = Guid.Parse(item.ToString()),
+                        Amount = model[item].ToString() == "" ? 0 : float.Parse(model[item].ToString())
+                    };
 
                     if(await _repo.BudgetMapExists(mapper.BudgetId, mapper.CategoryId))
                         _repo.Edit<BudgetCategoryMapper>(mapper);

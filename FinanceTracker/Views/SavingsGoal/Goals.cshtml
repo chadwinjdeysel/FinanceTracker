@@ -11,10 +11,12 @@
 </a>
 
 <div class="row">
-    @if (Model.Any()) 
+    @if (Model.Any())
     {
         @foreach (var item in Model)
         {
+            string modalName = "a" + item.SavingsGoal.Id.ToString() + "Modal";
+
             <div class="col-4">
                 <div class="card h-100">
                     <div class="card-body">
@@ -48,17 +50,20 @@
                                         Edit
                                     </a>
 
-                                    <a asp-action="Delete"
-                                       asp-route-id="@item.SavingsGoal.Id"
+                                    <a href="#"
+                                       role="button"
+                                       data-toggle="modal"
+                                       data-target="#@modalName"
                                        class="dropdown-item">
                                         Delete
                                     </a>
+
                                 </div>
                             </div>
                         </div>
-                        
+
                         <h5>R @item.SavingsGoal.Amount</h5>
-                        <p>@item.SavingsGoal.Description</p>    
+                        <p>@item.SavingsGoal.Description</p>
 
                         @if (item.SavingsGoal.HasDeadline)
                         {
@@ -66,13 +71,54 @@
                         }
 
                         <div class="progress">
-                            <div class="progress-bar" 
+                            <div class="progress-bar"
                                  role="progressbar"
                                  aria-valuenow="@item.Progress"
                                  aria-valuemin="0"
                                  aria-valuemax="100"
                                  style="width: @item.Progress%">
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade"
+                 id="@modalName"
+                 tabindex="-1"
+                 role="dialog"
+                 aria-labelledby="@modalName"
+                 aria-hidden="true">
+
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete this savings goal?</h5>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row justify-content-between col-12">
+                                <p class="text-larger">@item.SavingsGoal.Name</p>
+                                <p class="text-larger">R @item.SavingsGoal.Amount</p>
+                            </div>
+
+                            <span class="text-danger">@item.SavingsGoal.Deadline.ToShortDateString()</span>
+                            <p>@item.SavingsGoal.Description</p>
+
+                            <p class="text-danger"><small>* by deleting this savings goal, you will delete ALL transactions related to this category.</small></p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                            <a asp-action="Delete"
+                               asp-route-id="@item.SavingsGoal.Id"
+                               class="btn btn-danger">
+                                Delete
+                            </a>
                         </div>
                     </div>
                 </div>
