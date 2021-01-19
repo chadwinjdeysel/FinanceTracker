@@ -14,6 +14,8 @@
             <input asp-for="Amount"
                    type="text"
                    class="form-control" />
+
+            <span class="text-danger" asp-validation-for="Amount"></span>
         </div>
 
         <div class="form-group col-6">
@@ -43,7 +45,9 @@
             <input asp-for="Date"
                    type="date"
                    class="form-control" 
-                   value="@String.Format("{0:yyyy-MM-dd}", DateTime.Now)"/>
+                   value="@String.Format("{0:yyyy-MM-dd}", DateTime.Now)" />
+
+            <span class="text-danger" asp-validation-for="Date"></span>
         </div>
     </div>
 

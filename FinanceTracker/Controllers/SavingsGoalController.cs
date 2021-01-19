@@ -54,7 +54,11 @@ namespace FinanceTracker.Controllers
 
         public IActionResult Add()
         {
-            return View();
+            var model = new SavingsGoal()
+            {
+                HasDeadline = false,
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -70,7 +74,7 @@ namespace FinanceTracker.Controllers
                 throw new Exception("Something went wrong, trying to add new Savings Goal");
             }
 
-            return View();
+            return View(model);
         }
 
         public async Task<IActionResult> Edit(Guid id)
@@ -94,7 +98,7 @@ namespace FinanceTracker.Controllers
                     return RedirectToAction("Goals");
             }
 
-            return View();
+            return View(goal);
         }
 
         public async Task<IActionResult> Delete(Guid id)

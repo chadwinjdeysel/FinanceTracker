@@ -46,12 +46,18 @@
             </div>
         </div>
 
-        <div class="form-group deadline col-8" style="display: none">
+        @{ 
+            string visability = Model.HasDeadline ? "block" : "none";
+        }
+
+        <div class="form-group deadline col-8" style="display: @visability">
             <label asp-for="Deadline"></label>
             <input asp-for="Deadline"
                    type="date"
-                   value="@String.Format("{0:yyyy-MM-dd}", DateTime.Now)"
+                   value="@String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(1))"
                    class="form-control" />
+
+            <span class="text-danger" asp-validation-for="Deadline"></span>
         </div>
     </div>
 

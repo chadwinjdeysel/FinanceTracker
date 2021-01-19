@@ -80,7 +80,8 @@ namespace FinanceTracker.Controllers
                     return RedirectToAction("Index");
             }
 
-            return View();
+            model.Categories = await _repo.GetList<Category>();
+            return View(model);
         }
 
         [HttpGet]
@@ -120,7 +121,8 @@ namespace FinanceTracker.Controllers
                     return RedirectToAction("Index");
             }
 
-            return View();
+            model.Categories = await _repo.GetList<Category>();
+            return View(model);
         }
 
         [HttpGet]
