@@ -2,4 +2,46 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<h1 class="text-center display-4">Dashboard will be here</h1>
+@section Styles {
+    <style>
+        .item1 {
+            grid-area: card-1;
+        }
+
+        .item2{
+            grid-area: card-2;
+        }
+
+        .item3{
+            grid-area: card-3;
+        }
+
+        .item4{
+            grid-area: card-4;
+        }
+
+
+        .grid-container {
+            display: grid;
+            grid-template: 
+                'card-1 card-1 card-2'
+                'card-1 card-1 card-2'
+                'card-3 card-4 card-2'
+                'card-3 card-4 card-2'
+                'card-3 card-4 card-2';
+            height: 85vh;
+            grid-gap: 1.5em;
+        }
+
+        .grid-container > div {
+            background-color: white;
+        }
+    </style>
+}
+
+<div class="grid-container">
+    <div class="item1 shadow-sm"></div>
+    <div class="item2 shadow-sm"></div>
+    <div class="item3 shadow-sm"></div>
+    <div class="item4 shadow-sm"></div>
+</div>
