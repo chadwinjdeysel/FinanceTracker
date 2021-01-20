@@ -20,6 +20,7 @@ namespace FinanceTracker.Data
 
         // expenses
         Task<PaginatedList<Expense>> GetPagedExpenses(ExpenseParams @params);
+        Task<List<Expense>> GetRecentExpenses();
 
         // savings tracker
         Task<float> CalculateProgress(SavingsGoal goal);

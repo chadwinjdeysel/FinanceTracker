@@ -22,7 +22,7 @@ namespace FinanceTracker.Helpers
     public class Dataset
     {
         public string label { get; set; }
-        public string backgroundColor { get; set; }
+        public string[] backgroundColor { get; set; }
         public string borderColor { get; set; }
         public float[] data { get; set; }
     }

@@ -156,3 +156,10 @@ body{
     background-color: #f2f2ff;
 }
 
+.color-ball {
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+    border-radius: 50%
+}
+

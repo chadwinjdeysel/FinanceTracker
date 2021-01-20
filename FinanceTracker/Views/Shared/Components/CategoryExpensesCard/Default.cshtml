@@ -1,5 +1,138 @@
-﻿<div class="card h-100 shadow-sm">
+﻿@*Category Breakdown/Recent Expenses Card*@
+
+@model CategoryExpensesViewModel
+
+<div class="card h-100 shadow-sm">
     <div class="card-body">
+        <p class="text-center text-larger m-0">Categories</p>
+
+        <div class="col-8 mx-auto my-3">
+            <canvas id="categoryChart" width="100%" height="100%"></canvas>
+        </div>
+
+        <div class="row justify-content-between col-12 mx-auto mb-2">
+            <p class="text-larger m-0">Recent Expenses</p>
+
+            <a asp-action="Add"
+               asp-controller="Expense"
+               class="btn btn-outline-primary">
+                Add
+            </a>
+        </div>
+
+        <table class="table mb-0">
+            @foreach (var item in Model.Expenses)
+            {
+                string modalName = "a" + item.Id.ToString() + "Modal";
+
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div style="height: 15px;
+                                        width: 15px;
+                                        border-radius: 50%;
+                                        margin: 6px;
+                                        background-color: @item.Category.ColorCode">
+
+                            </div>
+                            @item.Category.Name
+                        </div>
+                        
+                    </td>
+                    <td>R @item.Amount</td>
+                    <td>
+                        <div class="dropdown dropleft">
+                            <a class="text-muted"
+                               href="#"
+                               role="button"
+                               id="dropdownMenu"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+                            </a>
+
+                            <div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenu">
+                                <a asp-action="Edit"
+                                   asp-controller="Expense"
+                                   asp-route-id="@item.Id"
+                                   class="dropdown-item">
+                                    Edit
+                                </a>
+
+                                <a href="#"
+                                   role="button"
+                                   data-toggle="modal"
+                                   data-target="#@modalName"
+                                   class="dropdown-item">
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <div class="modal fade"
+                     id="@modalName"
+                     tabindex="-1"
+                     role="dialog"
+                     aria-labelledby="@modalName"
+                     aria-hidden="true">
+
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete this expense?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span class="text-larger">R @item.Amount</span>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="row justify-content-end mx-1">
+                                            <span class="text-larger">@item.Category.Name</span>
+                                            <div class="color-ball" style="background-color: @item.Category.ColorCode"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <span>@item.Description</span>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                                <a asp-action="Delete"
+                                   asp-controller="Expense"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-danger">
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </table>
+
+
+        <div class="row justify-content-center">
+            <a asp-action="Index"
+               asp-controller="Expense"
+               class="text-muted">
+                view more
+            </a>
+        </div>
 
     </div>
 </div>
+
+<script>
+    var ctx = document.getElementById('categoryChart').getContext('2d');
+    var chart = new Chart(ctx, @Html.Raw(Json.Serialize(Model.Chart)))
+</script>

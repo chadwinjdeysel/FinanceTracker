@@ -74,7 +74,7 @@ namespace FinanceTracker.ViewComponents
                     new Dataset()
                     {
                         label = "saved",
-                        backgroundColor = "rgba(0, 242, 255, 0.2)",
+                        backgroundColor = new string[]{ "rgba(0, 242, 255, 0.2)" },
                         borderColor = "rgb(0, 242, 255)",
                         data = totalSavedForMonth.ToArray()
                     }   

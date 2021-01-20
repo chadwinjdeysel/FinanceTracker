@@ -20,7 +20,7 @@
             </div>
 
             <div class="col-6">
-                <div><canvas id="myChart"></canvas></div>
+                <div><canvas id="savingsChart"></canvas></div>
             </div>
         </div>
         
@@ -29,6 +29,6 @@
 </div>
 
 <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('savingsChart').getContext('2d');
     var chart = new Chart(ctx, @Html.Raw(Json.Serialize(Model.Chart)));
 </script>

@@ -121,6 +121,17 @@ namespace FinanceTracker.Data
             return await PaginatedList<Expense>.CreateAsync(expenses.AsNoTracking(), @params.PageNumber, @params.PageSize);
         }
 
+        public async Task<List<Expense>> GetRecentExpenses()
+        {
+            var expenses = await _context.Expenses
+                .Include(x => x.Category)
+                .OrderByDescending(x => x.Date)
+                .Take(5)
+                .ToListAsync();
+
+            return expenses;
+        }
+
         public  async Task<Dictionary<Guid, float>> GetTotalsForBudget()
         {
             var expenses = await _context.Expenses

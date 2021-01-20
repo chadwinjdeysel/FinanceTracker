@@ -23,6 +23,7 @@ namespace FinanceTracker.ViewModels
 
         public string Description { get; set; }
 
+        [Display(Name = "Category")]
         public Guid CategoryId { get; set; }
         public IEnumerable<Category> Categories { get; set; }
     }
