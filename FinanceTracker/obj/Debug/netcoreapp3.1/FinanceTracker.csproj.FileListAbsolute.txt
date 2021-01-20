@@ -144,3 +144,7 @@ C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Sa
 C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Budget\Index.cshtml.g.cs
 C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Budget\Add.cshtml.g.cs
 C:\Projects\FinanceTracker\financetracker\obj\Debug\netcoreapp3.1\Razor\Views\Budget\Edit.cshtml.g.cs
+C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\ExpenseSavingsCard\Default.cshtml.g.cs
+C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\BudgetUsedCard\Default.cshtml.g.cs
+C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CategoryExpensesCard\Default.cshtml.g.cs
+C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\SavingsGoalCard\Default.cshtml.g.cs

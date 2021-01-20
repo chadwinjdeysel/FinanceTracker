@@ -8,40 +8,58 @@
             grid-area: card-1;
         }
 
-        .item2{
+        .item2 {
             grid-area: card-2;
         }
 
-        .item3{
+        .item3 {
             grid-area: card-3;
         }
 
-        .item4{
+        .item4 {
             grid-area: card-4;
         }
 
 
         .grid-container {
             display: grid;
-            grid-template: 
+            grid-template-areas: 
                 'card-1 card-1 card-2'
                 'card-1 card-1 card-2'
+                'card-3 card-4 card-2'
                 'card-3 card-4 card-2'
                 'card-3 card-4 card-2'
                 'card-3 card-4 card-2';
+            grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             height: 85vh;
-            grid-gap: 1.5em;
+            grid-gap: 1em;
         }
 
-        .grid-container > div {
-            background-color: white;
+            .grid-container>div{
+                min-width: 0;
+            }
+
+        body{
+            overflow-y: hidden;
         }
     </style>
 }
 
 <div class="grid-container">
-    <div class="item1 shadow-sm"></div>
-    <div class="item2 shadow-sm"></div>
-    <div class="item3 shadow-sm"></div>
-    <div class="item4 shadow-sm"></div>
+    <div class="item1">
+        @await Component.InvokeAsync("ExpenseSavingsCard") 
+    </div>
+
+    <div class="item2">
+        @await Component.InvokeAsync("CategoryExpensesCard") 
+    </div>
+
+    <div class="item3">
+        @await Component.InvokeAsync("BudgetUsedCard") 
+    </div>
+
+    <div class="item4">
+        @await Component.InvokeAsync("SavingsGoalCard") 
+    </div>
 </div>
