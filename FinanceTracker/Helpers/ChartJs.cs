@@ -34,6 +34,7 @@ namespace FinanceTracker.Helpers
         public Scales scales { get; set; }
         public Title title { get; set; }
         public Legend legend{ get; set; }
+        public int cutoutPercentage { get; set; }
     }
 
     public class Title

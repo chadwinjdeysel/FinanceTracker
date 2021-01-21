@@ -1,0 +1,27 @@
+{
+  "type": "doughnut",
+  "data": {
+    "labels": [ "Used", "Left" ],
+    "datasets": [
+      {
+        "label": "BudgetUsed",
+        "backgroundColor": [ "#ff004c", "#e6e6e6" ],
+        "borderColor": "#fff",
+        "data": [ 65, 35 ]
+      }
+    ]
+  },
+  "options": {
+    "responsive": true,
+    "maintainAspectRatio": false,
+    "scales": null,
+    "title": {
+      "display": false,
+      "text": null,
+      "fontStyle": null,
+      "fontFamily": null,
+      "fontSize": 0
+    },
+    "legend": { "display": false },
+    "cutoutPercentage": 80
+  }

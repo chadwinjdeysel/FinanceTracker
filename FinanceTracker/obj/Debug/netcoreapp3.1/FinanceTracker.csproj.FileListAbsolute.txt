@@ -148,3 +148,4 @@ C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Sh
 C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\BudgetUsedCard\Default.cshtml.g.cs
 C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\CategoryExpensesCard\Default.cshtml.g.cs
 C:\Projects\FinanceTracker\FinanceTracker\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\SavingsGoalCard\Default.cshtml.g.cs
+C:\Projects\FinanceTracker\FinanceTracker\bin\Debug\netcoreapp3.1\Helpers\json.json

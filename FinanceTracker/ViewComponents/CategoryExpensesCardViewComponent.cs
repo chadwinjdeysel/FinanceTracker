@@ -76,7 +76,8 @@ namespace FinanceTracker.ViewComponents
                     legend = new Legend
                     {
                         display = false
-                    }
+                    },
+                    cutoutPercentage = 50
                 }
             };
 
