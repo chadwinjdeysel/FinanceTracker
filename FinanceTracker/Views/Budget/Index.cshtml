@@ -70,7 +70,7 @@
                                 @item.Category.Name
                             </div>
                         </td>
-                        <td>@item.Amount</td>
+                        <td>@String.Format("{0:0.00}",item.Amount)</td>
                         <td>@Model.TotalForTheMonth[item.CategoryId]</td>
 
                         @{
@@ -87,7 +87,7 @@
 
                         <td>
                             <div class="@text">
-                                @difference
+                                @String.Format("{0:0.00}", difference)
                             </div>
                         </td>
                         <td>
