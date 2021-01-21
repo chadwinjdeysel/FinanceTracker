@@ -25,6 +25,7 @@ namespace FinanceTracker.Data
         // savings tracker
         Task<float> CalculateProgress(SavingsGoal goal);
         Task<SavingsGoal> GetGoal(Guid id);
+        Task<SavingsGoal> GetPinnedGoal();
 
         // budget manager
         Task<IEnumerable<BudgetCategoryMapper>> GetBudget();

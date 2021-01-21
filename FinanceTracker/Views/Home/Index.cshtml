@@ -20,6 +20,10 @@
             grid-area: card-4;
         }
 
+        .item5 {
+            grid-area: card-5;
+        }
+
 
         .grid-container {
             display: grid;
@@ -29,7 +33,7 @@
                 'card-3 card-4 card-2'
                 'card-3 card-4 card-2'
                 'card-3 card-4 card-2'
-                'card-3 card-4 card-2';
+                'card-3 card-5 card-2';
             grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
             grid-template-columns: 1fr 1fr 1fr;
             height: 88vh;
@@ -61,5 +65,11 @@
 
     <div class="item4">
         @await Component.InvokeAsync("SavingsGoalCard") 
+    </div>
+
+    <div class="item5">
+        <div class="card h-100 shadow-sm">
+
+        </div>
     </div>
 </div>

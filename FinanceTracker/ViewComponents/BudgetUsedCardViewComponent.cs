@@ -37,7 +37,7 @@ namespace FinanceTracker.ViewComponents
                     .Select(x => x.Value)
                     .FirstOrDefault();
 
-                if (totalForBudget > item.Amount)
+                if (item.Amount > 0 && totalForBudget > item.Amount)
                     categroriesOverBudget++;
             }
 

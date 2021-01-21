@@ -140,6 +140,9 @@ namespace FinanceTracker.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsPinned")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");

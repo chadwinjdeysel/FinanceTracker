@@ -66,6 +66,10 @@ namespace FinanceTracker.Controllers
         {
             if (ModelState.IsValid)
             {
+                var goals = await _repo.GetList<SavingsGoal>();
+                if (!goals.Any())
+                    model.IsPinned = true;
+
                 _repo.Add<SavingsGoal>(model);
 
                 if (await _repo.SaveAll())
@@ -114,6 +118,27 @@ namespace FinanceTracker.Controllers
                 return RedirectToAction("Goals");
 
             return RedirectToAction("Goals");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SetAsPinned(Guid id)
+        {
+            var goals = await _repo.GetList<SavingsGoal>();
+
+            foreach(var item in goals)
+            {
+                if (item.Id != id)
+                    item.IsPinned = false;
+                else
+                    item.IsPinned = true;
+
+                _repo.Edit<SavingsGoal>(item);
+            }
+
+            if (await _repo.SaveAll())
+                return RedirectToAction("Goals");
+
+            throw new Exception("Something went wrong trying to pin this item");
         }
     }
 }

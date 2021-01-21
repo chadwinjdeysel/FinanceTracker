@@ -1,38 +1,55 @@
 ﻿@model BudgetUsedViewModel
 
 <div class="card h-100 shadow-sm">
-    <div class="card-body">
 
-        <p class="text-larger text-center my-0">Budget Used</p>
-        <p class="text-center text-muted my-0"><small>this month</small></p>
+    @if (Model.CategoriesInBudget > 0)
+    {
+        <div class="card-body">
 
-        <div class="col-8 mx-auto my-1">
-            <canvas id="budgetUsedChart" width="100%" height="100%"></canvas>
+            <p class="text-larger text-center my-0">Budget Used</p>
+            <p class="text-center text-muted my-0"><small>this month</small></p>
 
-            <div class="doughnut-inner" style="margin-top: -140px">
-                <h2 class="text-center display-4">@Model.PercentageUsed%</h2>
-            </div>
-        </div>
+            <div class="col-8 mx-auto my-1">
+                <canvas id="budgetUsedChart" width="100%" height="100%"></canvas>
 
-
-        <div class="row" style="margin-top: 70px">
-            <div class="col-6">
-                <div>
-                    <h1 class="display-4 text-center text-primary my-0">@Model.CategoriesInBudget</h1>
-
-                    <p class="m-0 text-center">Categories</p>
-                    <p class="m-0 text-center text-muted"><small>used in budget</small></p>
+                <div class="doughnut-inner" style="margin-top: -140px">
+                    <h2 class="text-center display-4">@Model.PercentageUsed%</h2>
                 </div>
             </div>
 
-            <div class="col-6">
-                <h1 class="display-4 text-center text-danger my-0">@Model.CategoriesOverBudget</h1>
 
-                <p class="m-0 text-center">Categories</p>
-                <p class="m-0 text-center text-muted"><small>over budget</small></p>
+            <div class="row" style="margin-top: 70px">
+                <div class="col-6">
+                    <div>
+                        <h1 class="display-4 text-center text-primary my-0">@Model.CategoriesInBudget</h1>
+
+                        <p class="m-0 text-center">Categories</p>
+                        <p class="m-0 text-center text-muted"><small>used in budget</small></p>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <h1 class="display-4 text-center text-danger my-0">@Model.CategoriesOverBudget</h1>
+
+                    <p class="m-0 text-center">Categories</p>
+                    <p class="m-0 text-center text-muted"><small>over budget</small></p>
+                </div>
             </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="card-body text-center">
+            <p class="text-center text-larger">No Budget has been set for this month</p>
+
+            <a asp-action="Add"
+               asp-controller="Budget"
+               class="text-muted ">
+                add one here
+            </a>
+        </div>
+    }
+
 </div>
 
 <script>

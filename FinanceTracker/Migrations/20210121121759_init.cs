@@ -42,6 +42,7 @@ namespace FinanceTracker.Migrations
                     Amount = table.Column<float>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     HasDeadline = table.Column<bool>(nullable: false),
+                    IsPinned = table.Column<bool>(nullable: false),
                     Deadline = table.Column<DateTime>(nullable: false),
                     ImagePath = table.Column<string>(nullable: true)
                 },

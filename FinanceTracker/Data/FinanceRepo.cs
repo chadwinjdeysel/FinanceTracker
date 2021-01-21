@@ -121,6 +121,19 @@ namespace FinanceTracker.Data
             return await PaginatedList<Expense>.CreateAsync(expenses.AsNoTracking(), @params.PageNumber, @params.PageSize);
         }
 
+        public async Task<SavingsGoal> GetPinnedGoal()
+        {
+            var goal = await _context.SavingsGoals
+                .Where(x => x.IsPinned == true)
+                .FirstOrDefaultAsync();
+
+            if (goal != null)
+                return goal;
+            else
+                return new SavingsGoal();
+
+        }
+
         public async Task<List<Expense>> GetRecentExpenses()
         {
             var expenses = await _context.Expenses

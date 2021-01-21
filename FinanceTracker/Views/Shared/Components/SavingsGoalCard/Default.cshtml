@@ -1,5 +1,90 @@
-﻿<div class="card h-100 shadow-sm">
-    <div class="card-body">
+﻿@* Savings Goal Card *@
 
-    </div>
+@model SavingsGoalProgressViewModel
+
+<div class="card h-100 shadow-sm">
+
+    @if (Model.SavingsGoal.Id != Guid.Empty)
+    {
+        <div class="dropdown dropleft card-menu">
+            <a class="text-muted"
+               href="#"
+               role="button"
+               id="dropdownMenu"
+               data-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false">
+                <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                <a asp-action="Add"
+                   asp-controller="Savings"
+                   asp-route-savingsGoalId="@Model.SavingsGoal.Id"
+                   asp-route-type="0"
+                   role="button"
+                   class="dropdown-item">
+                    Add to Savings
+                </a>
+
+                <a asp-action="Add"
+                   asp-controller="Savings"
+                   asp-route-savingsGoalId="@Model.SavingsGoal.Id"
+                   asp-route-type="1"
+                   role="button"
+                   class="dropdown-item">
+                    Subtract from Savings
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-5">
+                <img src="~/images/placeholder-image.png"
+                     asp-append-version="false"
+                     width="50%"
+                     class="card-img-top" />
+            </div>
+
+            <div class="col-7 card-body pl-1">
+                <p class="text-larger m-0">@Model.SavingsGoal.Name</p>
+
+                <h3 class="m-0">R @String.Format("{0:0.00}", Model.SavingsGoal.Amount)</h3>
+            </div>
+
+        </div>
+
+
+        <div class="card-body d-flex flex-column">
+            <p class="mb-3 text-larger">@Model.SavingsGoal.Description</p>
+
+            @if (Model.SavingsGoal.HasDeadline)
+            {
+                <p class="m-0 text-muted">deadline: </p>
+                <p class="m-0 text-danger">@Model.SavingsGoal.Deadline.ToShortDateString()</p>
+            }
+
+            <div class="progress mt-auto">
+                <div class="progress-bar"
+                     role="progressbar"
+                     aria-valuenow="@Model.Progress"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     style="width: @Model.Progress%">
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card-body text-center">
+            <p class="text-center text-larger">No Savings Goals were found</p>
+
+            <a asp-action="Add"
+               asp-controller="SavingsGoal"
+               class="text-muted ">
+                add one here
+            </a>
+        </div>
+    }
 </div>

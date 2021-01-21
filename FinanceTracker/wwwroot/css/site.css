@@ -163,3 +163,9 @@ body{
     border-radius: 50%
 }
 
+.card-menu {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1000;
+}
