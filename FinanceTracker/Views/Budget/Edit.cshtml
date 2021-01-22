@@ -16,38 +16,45 @@
     </style>
 }
 
-<form method="post"
-      asp-action="Edit">
+<div class="card-container">
+    <div class="card shadow-sm shadow-sm">
+        <div class="card-body">
 
-    <input hidden
-           name="BudgetId"
-           value="@Model.BudgetId" />
+            <form method="post"
+                  asp-action="Edit">
 
-    <div class="row">
-        @foreach (var item in Model.TotalsForTheMonth)
-        {
-            <div class="form-group col-6">
-                <label>
-                    <div class="row justify-content-around">
-                        <div class="color-ball" style="background-color: @item.Key.ColorCode"></div>
-                        @item.Key.Name
-                    </div>
-                </label>
+                <input hidden
+                       name="BudgetId"
+                       value="@Model.BudgetId" />
 
-                <input class="form-control"
-                       name="@item.Key.Id"
-                       type="text"
-                       value="@item.Value" />
-            </div>
-        }
+                <div class="row">
+                    @foreach (var item in Model.TotalsForTheMonth)
+                    {
+                        <div class="form-group col-6">
+                            <label>
+                                <div class="row justify-content-around">
+                                    <div class="color-ball" style="background-color: @item.Key.ColorCode"></div>
+                                    @item.Key.Name
+                                </div>
+                            </label>
+
+                            <input class="form-control"
+                                   name="@item.Key.Id"
+                                   type="text"
+                                   value="@item.Value" />
+                        </div>
+                    }
+                </div>
+
+                <button class="btn btn-primary"
+                        type="submit">
+                    Edit Budget
+                </button>
+
+            </form>
+        </div>
     </div>
-
-    <button class="btn btn-primary"
-            type="submit">
-        Edit Budget
-    </button>
-
-</form>
+</div>
 
 @section Scripts{
     <script>

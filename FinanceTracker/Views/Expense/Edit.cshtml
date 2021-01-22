@@ -3,55 +3,62 @@
 @{ 
     ViewData["Title"] = "Edit Expense";
 }
-<form method="post"
-      asp-action="edit"
-      asp-controller="expense">
 
-    <input type="hidden"
-           asp-for="Id" />
+<div div class="card-container">
+    <div class="card col-10 shadow-sm">
+        <div class="card-body">
+            <form method="post"
+                  asp-action="edit"
+                  asp-controller="expense">
 
-    <div class="row">
-        <div class="form-group col-6">
-            <label asp-for="Amount"></label>
-            <input asp-for="Amount"
-                   type="text"
-                   class="form-control" />
+                <input type="hidden"
+                       asp-for="Id" />
 
-            <span class="text-danger" asp-validation-for="Amount"></span>
-        </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label asp-for="Amount"></label>
+                        <input asp-for="Amount"
+                               type="text"
+                               class="form-control" />
 
-        <div class="form-group col-6">
-            <label asp-for="CategoryId"></label>
-            <select class="form-control"
-                    asp-for="CategoryId">
-                @foreach (var item in Model.Categories)
-                {
-                    <option value="@item.Id">@item.Name  </option>
-                }
-            </select>
-        </div>
-    </div>
+                        <span class="text-danger" asp-validation-for="Amount"></span>
+                    </div>
 
-    <div class="row">
-        <div class="form-group col-6">
-            <label asp-for="Description"></label>
-            <textarea asp-for="Description"
-                      class="form-control">
+                    <div class="form-group col-6">
+                        <label asp-for="CategoryId"></label>
+                        <select class="form-control"
+                                asp-for="CategoryId">
+                            @foreach (var item in Model.Categories)
+                            {
+                                <option value="@item.Id">@item.Name  </option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label asp-for="Description"></label>
+                        <textarea asp-for="Description"
+                                  class="form-control">
         </textarea>
-        </div>
+                    </div>
 
-        <div class="form-group col-6">
-            <label asp-for="Date"></label>
-            <input asp-for="Date"
-                   type="date"
-                   class="form-control" />
+                    <div class="form-group col-6">
+                        <label asp-for="Date"></label>
+                        <input asp-for="Date"
+                               type="date"
+                               class="form-control" />
 
-            <span class="text-danger" asp-validation-for="Date"></span>
+                        <span class="text-danger" asp-validation-for="Date"></span>
+                    </div>
+                </div>
+
+                <button type="submit"
+                        class="btn btn-primary my-3">
+                    Edit
+                </button>
+            </form>
         </div>
     </div>
-
-    <button type="submit"
-            class="btn btn-primary my-3">
-        Edit
-    </button>
-</form>
+</div>

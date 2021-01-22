@@ -4,69 +4,77 @@
     ViewData["Title"] = "Edit Savings Goal";
 }
 
-<form asp-action="Edit"
-      method="post">
+<div class="card-container">
+    <div class="card col-8 shadow-sm">
+        <div class="card-body">
 
-    <input type="hidden"
-           asp-for="Id" />
+            <form asp-action="Edit"
+                  method="post">
 
-    <div class="row">
-        <div class="form-group col-6">
-            <label asp-for="Name"></label>
-            <input asp-for="Name"
-                   type="text"
-                   class="form-control" />
+                <input type="hidden"
+                       asp-for="Id" />
 
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name"
+                               type="text"
+                               class="form-control" />
 
-        <div class="form-group col-6">
-            <label asp-for="Amount"></label>
-            <input asp-for="Amount"
-                   type="text"
-                   class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
 
-            <span asp-validation-for="Amount" class="text-danger"></span>
-        </div>
-    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="Amount"></label>
+                        <input asp-for="Amount"
+                               type="text"
+                               class="form-control" />
 
-    <div class="form-group">
-        <label asp-for="Description"></label>
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                </div>
 
-        <textarea asp-for="Description"
-                  class="form-control">
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+
+                    <textarea asp-for="Description"
+                              class="form-control">
         </textarea>
-    </div>
+                </div>
 
-    <div class="row">
-        <div class="form-group col-4 my-auto">
-            <div class="custom-control custom-checkbox my-3">
-                <input asp-for="HasDeadline"
-                       type="checkbox"
-                       class="custom-control-input has-deadline"
-                       onchange="valueChanged()">
-                <label class="custom-control-label" asp-for="HasDeadline"></label>
-            </div>
+                <div class="row">
+                    <div class="form-group col-4 my-auto">
+                        <div class="custom-control custom-checkbox my-3">
+                            <input asp-for="HasDeadline"
+                                   type="checkbox"
+                                   class="custom-control-input has-deadline"
+                                   onchange="valueChanged()">
+                            <label class="custom-control-label" asp-for="HasDeadline"></label>
+                        </div>
+                    </div>
+
+                    @{
+                        string visability = Model.HasDeadline ? "block" : "none";
+                        DateTime deadline = Model.HasDeadline ? Model.Deadline : DateTime.Now.AddDays(1);
+                    }
+
+                    <div class="form-group deadline col-8" style="display: @visability">
+                        <label asp-for="Deadline"></label>
+                        <input asp-for="Deadline"
+                               type="date"
+                               value="@String.Format("{0:yyyy-MM-dd}", deadline)"
+                               class="form-control" />
+
+                        <span class="text-danger" asp-validation-for="Deadline"></span>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Edit Savings Goal</button>
+            </form>
+
         </div>
-
-        @{
-            string visability = Model.HasDeadline ? "block" : "none";
-            DateTime deadline = Model.HasDeadline ? Model.Deadline : DateTime.Now.AddDays(1);
-        }
-
-        <div class="form-group deadline col-8" style="display: @visability">
-            <label asp-for="Deadline"></label>
-            <input asp-for="Deadline"
-                   type="date"
-                   value="@String.Format("{0:yyyy-MM-dd}", deadline)"
-                   class="form-control" />
-
-            <span class="text-danger" asp-validation-for="Deadline"></span>
-        </div>
     </div>
-
-    <button class="btn btn-primary" type="submit">Edit Savings Goal</button>
-</form>
+</div>
 
 @section Scripts{
     <script>

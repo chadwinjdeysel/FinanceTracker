@@ -169,3 +169,10 @@ body{
     right: 5px;
     z-index: 1000;
 }
+
+.card-container{
+    display: flex;
+    min-height: 75vh;
+    align-items: center;
+    justify-content: center;
+}

@@ -4,41 +4,49 @@
     ViewData["Title"] = "Add new Saving";
 } 
 
-<form method="post"
-      asp-action="Add">
+<div class="card-container">
+    <div class="card col-8 shadow-sm">
+        <div class="card-body">
 
-    <input hidden asp-for="SavingsGoalId" />
+            <form method="post"
+                  asp-action="Add">
 
-    <div class="row">
-        <div class="form-group col-6">
-            <label asp-for="Amount"></label>
-            <input asp-for="Amount"
-                   type="text"
-                   class="form-control" />
+                <input hidden asp-for="SavingsGoalId" />
 
-            <span asp-validation-for="Amount" class="text-danger"></span>
-        </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label asp-for="Amount"></label>
+                        <input asp-for="Amount"
+                               type="text"
+                               class="form-control" />
 
-        <div class="form-group col-6">
-            <label asp-for="Date"></label>
-            <input asp-for="Date"
-                   type="date"
-                   class="form-control"
-                   value="@String.Format("{0:yyyy-MM-dd}", DateTime.Now)" />
-        </div>
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
 
-        <div class="form-group col-6">
-            <label asp-for="Type"></label>
-            <select asp-for="Type"
-                    class="form-control">
-                <option value="0">Addition</option>
-                <option value="1">Subtraction</option>
-            </select>
+                    <div class="form-group col-6">
+                        <label asp-for="Date"></label>
+                        <input asp-for="Date"
+                               type="date"
+                               class="form-control"
+                               value="@String.Format("{0:yyyy-MM-dd}", DateTime.Now)" />
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label asp-for="Type"></label>
+                        <select asp-for="Type"
+                                class="form-control">
+                            <option value="0">Addition</option>
+                            <option value="1">Subtraction</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit"
+                        class="btn btn-primary">
+                    Record New Saving
+                </button>
+            </form>
+
         </div>
     </div>
-
-    <button type="submit"
-            class="btn btn-primary">
-        Record New Saving
-    </button>
-</form>
+</div>

@@ -18,8 +18,8 @@
             string modalName = "a" + item.SavingsGoal.Id.ToString() + "Modal";
 
             <div class="col-4">
-                <div class="card h-100">
-                    <div class="card-body">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column ">
 
                         <div class="row justify-content-between">
 
@@ -84,7 +84,7 @@
                             <small class="text-danger"><p>Deadline - @item.SavingsGoal.Deadline.ToShortDateString()</p></small>
                         }
 
-                        <div class="progress">
+                        <div class="progress mt-auto">
                             <div class="progress-bar"
                                  role="progressbar"
                                  aria-valuenow="@item.Progress"

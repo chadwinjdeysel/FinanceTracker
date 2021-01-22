@@ -18,305 +18,312 @@
     </style>
 }
 
-<a asp-action="Add"
-   asp-controller="Expense"
-   class="btn btn-primary my-3 ">
-    Add New Expense
-</a>
+<div class="card-container">
+    <div class="card col-12 shadow-sm">
+        <div class="card-body">
+            <a asp-action="Add"
+               asp-controller="Expense"
+               class="btn btn-primary my-3 ">
+                Add New Expense
+            </a>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>
-                @if (ViewData["OrderBy"].ToString() == "amount-ascending")
-                {
-                    <a asp-action="Index"
-                       asp-route-orderBy="amount-descending"
-                       asp-route-page="1"
-                       asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected"
-                       class="text-dark">
-                        Amount
-                        <span class="oi oi-sort-ascending"></span>
-                    </a>
-                }
-                else if (ViewData["OrderBy"].ToString() == "amount-descending")
-                {
-                    <a asp-action="Index"
-                       asp-route-orderBy="amount-ascending"
-                       asp-route-page="1"
-                       asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected"
-                       class="text-dark">
-                        Amount
-                        <span class="oi oi-sort-descending"></span>
-                    </a>
-                }
-                else
-                {
-                    <a asp-action="Index"
-                       asp-route-orderBy="amount-ascending"
-                       asp-route-page="1"
-                       asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected"
-                       class="text-dark">
-                        Amount
-                    </a>
-                }
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @if (ViewData["OrderBy"].ToString() == "amount-ascending")
+                            {
+                                <a asp-action="Index"
+                                   asp-route-orderBy="amount-descending"
+                                   asp-route-page="1"
+                                   asp-route-pageSize="@Model.PageSize"
+                                   asp-route-category="@Model.CategorySelected"
+                                   class="text-dark">
+                                    Amount
+                                    <span class="oi oi-sort-ascending"></span>
+                                </a>
+                            }
+                            else if (ViewData["OrderBy"].ToString() == "amount-descending")
+                            {
+                                <a asp-action="Index"
+                                   asp-route-orderBy="amount-ascending"
+                                   asp-route-page="1"
+                                   asp-route-pageSize="@Model.PageSize"
+                                   asp-route-category="@Model.CategorySelected"
+                                   class="text-dark">
+                                    Amount
+                                    <span class="oi oi-sort-descending"></span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-action="Index"
+                                   asp-route-orderBy="amount-ascending"
+                                   asp-route-page="1"
+                                   asp-route-pageSize="@Model.PageSize"
+                                   asp-route-category="@Model.CategorySelected"
+                                   class="text-dark">
+                                    Amount
+                                </a>
+                            }
 
-            </th>
-            <th>
-                @if (ViewData["OrderBy"].ToString() == "date-ascending")
-                {
-                    <a asp-action="Index"
-                       asp-route-orderBy="date-descending"
-                       asp-route-page="1"
-                       asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected"
-                       class="text-dark">
-                        Date
-                        <span class="oi oi-sort-ascending"></span>
-                    </a>
-                }
-                else if (ViewData["OrderBy"].ToString() == "date-descending")
-                {
-                    <a asp-action="Index"
-                       asp-route-orderBy="date-ascending"
-                       asp-route-page="1"
-                       asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected"
-                       class="text-dark">
-                        Date
-                        <span class="oi oi-sort-descending"></span>
-                    </a>
-                }
-                else
-                {
-                    <a asp-action="Index"
-                       asp-route-orderBy="date-ascending"
-                       asp-route-page="1"
-                       asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected"
-                       class="text-dark">
-                        Date
-                    </a>
-                }
-            </th>
+                        </th>
+                        <th>
+                            @if (ViewData["OrderBy"].ToString() == "date-ascending")
+                            {
+                                <a asp-action="Index"
+                                   asp-route-orderBy="date-descending"
+                                   asp-route-page="1"
+                                   asp-route-pageSize="@Model.PageSize"
+                                   asp-route-category="@Model.CategorySelected"
+                                   class="text-dark">
+                                    Date
+                                    <span class="oi oi-sort-ascending"></span>
+                                </a>
+                            }
+                            else if (ViewData["OrderBy"].ToString() == "date-descending")
+                            {
+                                <a asp-action="Index"
+                                   asp-route-orderBy="date-ascending"
+                                   asp-route-page="1"
+                                   asp-route-pageSize="@Model.PageSize"
+                                   asp-route-category="@Model.CategorySelected"
+                                   class="text-dark">
+                                    Date
+                                    <span class="oi oi-sort-descending"></span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-action="Index"
+                                   asp-route-orderBy="date-ascending"
+                                   asp-route-page="1"
+                                   asp-route-pageSize="@Model.PageSize"
+                                   asp-route-category="@Model.CategorySelected"
+                                   class="text-dark">
+                                    Date
+                                </a>
+                            }
+                        </th>
 
-            <th>
-                <form asp-action="Index">
-                    <input type="hidden"
-                           asp-for="PageSize" />
+                        <th>
+                            <form asp-action="Index">
+                                <input type="hidden"
+                                       asp-for="PageSize" />
 
-                    <select class="form-control"
-                            asp-for="CategorySelected"
-                            style="width: 175px"
-                            onchange="this.form.submit()">
+                                <select class="form-control"
+                                        asp-for="CategorySelected"
+                                        style="width: 175px"
+                                        onchange="this.form.submit()">
 
-                        <option value="0">All Categories</option>
-                        @foreach (var item in categories)
+                                    <option value="0">All Categories</option>
+                                    @foreach (var item in categories)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+
+                                </select>
+
+                            </form>
+                        </th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+
+                @if (expenses.Any())
+                {
+
+                    <tbody>
+                        @foreach (var item in expenses)
                         {
-                            <option value="@item.Id">@item.Name</option>
-                        }
 
-                    </select>
+                            string modalName = "a" + item.Id.ToString() + "Modal";
 
-                </form>
-            </th>
-            <th>Description</th>
-            <th></th>
-        </tr>
-    </thead>
+                            <tr>
+                                <td>@item.Amount</td>
+                                <td>@item.Date.ToShortDateString()</td>
+                                <td>@item.Category.Name</td>
+                                <td>@item.Description</td>
+                                <td>
+                                    <div class="dropdown dropleft">
+                                        <a class="text-muted"
+                                           href="#"
+                                           role="button"
+                                           id="dropdownMenu"
+                                           data-toggle="dropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false">
+                                            <span class="oi oi-ellipses"></span>
+                                        </a>
 
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                            <a asp-action="Edit"
+                                               asp-route-id="@item.Id"
+                                               class="dropdown-item">
+                                                Edit
+                                            </a>
 
-    @if (expenses.Any())
-    {
-
-        <tbody>
-            @foreach (var item in expenses)
-            {
-
-                string modalName = "a" + item.Id.ToString() + "Modal";
-
-                <tr>
-                    <td>@item.Amount</td>
-                    <td>@item.Date.ToShortDateString()</td>
-                    <td>@item.Category.Name</td>
-                    <td>@item.Description</td>
-                    <td>
-                        <div class="dropdown dropleft">
-                            <a class="text-muted"
-                               href="#"
-                               role="button"
-                               id="dropdownMenu"
-                               data-toggle="dropdown"
-                               aria-haspopup="true"
-                               aria-expanded="false">
-                                <span class="oi oi-ellipses"></span>
-                            </a>
-
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                <a asp-action="Edit"
-                                   asp-route-id="@item.Id"
-                                   class="dropdown-item">
-                                    Edit
-                                </a>
-
-                                <a href="#"
-                                   role="button"
-                                   data-toggle="modal"
-                                   data-target="#@modalName"
-                                   class="dropdown-item">
-                                    Delete
-                                </a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-
-                <div class="modal fade" 
-                     id="@modalName" 
-                     tabindex="-1" 
-                     role="dialog" 
-                     aria-labelledby="@modalName" 
-                     aria-hidden="true">
-
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Delete this expense?</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <span class="text-larger">R @item.Amount</span>
+                                            <a href="#"
+                                               role="button"
+                                               data-toggle="modal"
+                                               data-target="#@modalName"
+                                               class="dropdown-item">
+                                                Delete
+                                            </a>
+                                        </div>
                                     </div>
+                                </td>
+                            </tr>
 
-                                    <div class="col-6">
-                                        <div class="row justify-content-end mx-1">
-                                            <span class="text-larger">@item.Category.Name</span>
-                                            <div class="color-ball" style="background-color: @item.Category.ColorCode"></div>
+                            <div class="modal fade"
+                                 id="@modalName"
+                                 tabindex="-1"
+                                 role="dialog"
+                                 aria-labelledby="@modalName"
+                                 aria-hidden="true">
+
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete this expense?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <span class="text-larger">R @item.Amount</span>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="row justify-content-end mx-1">
+                                                        <span class="text-larger">@item.Category.Name</span>
+                                                        <div class="color-ball" style="background-color: @item.Category.ColorCode"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <span>@item.Description</span>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                                            <a asp-action="Delete"
+                                               asp-route-id="@item.Id"
+                                               class="btn btn-danger">
+                                                Delete
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-
-                                <span>@item.Description</span>
                             </div>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-                                <a asp-action="Delete"
-                                   asp-route-id="@item.Id"
-                                   class="btn btn-danger">
-                                    Delete
+                        }
+                    </tbody>
+                }
+                else
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                No expenses were found :(
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="dropdown dropleft">
+                                    <a class="text-muted"
+                                       href="#"
+                                       role="button"
+                                       id="dropdownMenu"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">
+                                        <span class="oi oi-ellipses"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                        <a asp-action="add"
+                                           class="dropdown-item">
+                                            Add new transaction
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+
+            </table>
+
+            <div class="row justify-content-between">
+                @{
+                    var prevDisabled = !expenses.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !expenses.HasNextPage ? "disabled" : "";
+
+                }
+
+                <div class="col-11">
+                    <ul class="pagination">
+                        <li class="page-item @prevDisabled">
+                            <a class="page-link"
+                               asp-action="Index"
+                               asp-route-page="@(expenses.PageIndex - 1)"
+                               asp-route-pageSize="@Model.PageSize"
+                               asp-route-category="@Model.CategorySelected">
+                                <
+                            </a>
+                        </li>
+
+
+                        @for (int i = 1; i <= expenses.TotalPages; i++)
+                        {
+                            var currentPageActive = expenses.PageIndex == i ? "active" : "";
+                            <li class="page-item @currentPageActive">
+                                <a class="page-link "
+                                   asp-action="Index"
+                                   asp-route-page="@i"
+                                   asp-route-pageSize="@Model.PageSize"
+                                   asp-route-category="@Model.CategorySelected">
+                                    @i
                                 </a>
-                            </div>
-                        </div>
-                    </div>
+                            </li>
+
+                        }
+
+                        <li class="page-item @nextDisabled">
+                            <a class="page-link"
+                               asp-action="Index"
+                               asp-route-page="@(expenses.PageIndex + 1)"
+                               asp-route-pageSize="@Model.PageSize"
+                               asp-route-category="@Model.CategorySelected">
+                                >
+                            </a>
+                        </li>
+                    </ul>
                 </div>
 
-            }
-        </tbody>
-    }
-    else
-    {
-        <tbody>
-            <tr>
-                <td>
-                    No expenses were found :(
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <div class="dropdown dropleft">
-                        <a class="text-muted"
-                           href="#"
-                           role="button"
-                           id="dropdownMenu"
-                           data-toggle="dropdown"
-                           aria-haspopup="true"
-                           aria-expanded="false">
-                            <span class="oi oi-ellipses"></span>
-                        </a>
+                <form asp-action="Index" class="col-1">
+                    <input type="hidden"
+                           asp-for="CategorySelected" />
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                            <a asp-action="add"
-                               class="dropdown-item">
-                                Add new transaction
-                            </a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    }
+                    <select asp-for="PageSize"
+                            class="form-control"
+                            onchange="this.form.submit()">
 
-</table>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                    </select>
 
-<div class="row justify-content-between">
-    @{
-        var prevDisabled = !expenses.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !expenses.HasNextPage ? "disabled" : "";
-
-    }
-
-    <div class="col-11">
-        <ul class="pagination">
-            <li class="page-item @prevDisabled">
-                <a class="page-link"
-                   asp-action="Index"
-                   asp-route-page="@(expenses.PageIndex - 1)"
-                   asp-route-pageSize="@Model.PageSize"
-                   asp-route-category="@Model.CategorySelected">
-                    <
-                </a>
-            </li>
-
-
-            @for (int i = 1; i <= expenses.TotalPages; i++)
-            {
-                var currentPageActive = expenses.PageIndex == i ? "active" : "";
-                <li class="page-item @currentPageActive">
-                    <a class="page-link "
-                       asp-action="Index"
-                       asp-route-page="@i"
-                       asp-route-pageSize="@Model.PageSize"
-                       asp-route-category="@Model.CategorySelected">
-                        @i
-                    </a>
-                </li>
-
-            }
-
-            <li class="page-item @nextDisabled">
-                <a class="page-link"
-                   asp-action="Index"
-                   asp-route-page="@(expenses.PageIndex + 1)"
-                   asp-route-pageSize="@Model.PageSize"
-                   asp-route-category="@Model.CategorySelected">
-                    >
-                </a>
-            </li>
-        </ul>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <form asp-action="Index" class="col-1">
-        <input type="hidden"
-               asp-for="CategorySelected" />
-
-        <select asp-for="PageSize"
-                class="form-control"
-                onchange="this.form.submit()">
-
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-        </select>
-
-    </form>
 </div>
+

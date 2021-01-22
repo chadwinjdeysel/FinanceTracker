@@ -16,148 +16,154 @@
     </style>
 }
 
-@if (Model.Budget.Any())
-{
-
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Budgeted Price</th>
-                <th>This month so far</th>
-                <th>Difference</th>
-                <th>
-                    <div class="dropdown dropleft">
-                        <a class="text-muted"
-                           href="#"
-                           role="button"
-                           id="dropdownMenu"
-                           data-toggle="dropdown"
-                           aria-haspopup="true"
-                           aria-expanded="false">
-                            <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                            <a asp-action="Edit"
-                               asp-route-id="@budgetId"
-                               class="dropdown-item">
-                                Edit this Budget
-                            </a>
-
-                            <a href="#"
-                               role="button"
-                               data-toggle="modal"
-                               data-target="#budgetModal"
-                               class="dropdown-item">
-                                Delete this budget
-                            </a>
-                        </div>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model.Budget)
+<div class="card-container"> 
+    <div class="card col-12 shadow-sm">
+        <div class="card-body">
+            @if (Model.Budget.Any())
             {
-                @if (item.Amount > 0)
-                {
-                    <tr>
-                        <td>
-                            <div class="row col-12">
-                                <div class="color-ball" style="background-color: @item.Category.ColorCode"></div>
-                                @item.Category.Name
-                            </div>
-                        </td>
-                        <td>@String.Format("{0:0.00}",item.Amount)</td>
-                        <td>@Model.TotalForTheMonth[item.CategoryId]</td>
 
-                        @{
-                            float difference = (item.Amount - Model.TotalForTheMonth[item.CategoryId]) * -1;
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Budgeted Price</th>
+                            <th>This month so far</th>
+                            <th>Difference</th>
+                            <th>
+                                <div class="dropdown dropleft">
+                                    <a class="text-muted"
+                                       href="#"
+                                       role="button"
+                                       id="dropdownMenu"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">
+                                        <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+                                    </a>
 
-                            string text = difference <= 0 ? "text-primary" : "text-danger";
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                        <a asp-action="Edit"
+                                           asp-route-id="@budgetId"
+                                           class="dropdown-item">
+                                            Edit this Budget
+                                        </a>
 
-                            if (difference == 0)
+                                        <a href="#"
+                                           role="button"
+                                           data-toggle="modal"
+                                           data-target="#budgetModal"
+                                           class="dropdown-item">
+                                            Delete this budget
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.Budget)
+                        {
+                            @if (item.Amount > 0)
                             {
-                                difference = 0;
-                                text = "text-danger";
+                                <tr>
+                                    <td>
+                                        <div class="row col-12">
+                                            <div class="color-ball" style="background-color: @item.Category.ColorCode"></div>
+                                            @item.Category.Name
+                                        </div>
+                                    </td>
+                                    <td>@String.Format("{0:0.00}", item.Amount)</td>
+                                    <td>@Model.TotalForTheMonth[item.CategoryId]</td>
+
+                                    @{
+                                        float difference = (item.Amount - Model.TotalForTheMonth[item.CategoryId]) * -1;
+
+                                        string text = difference <= 0 ? "text-primary" : "text-danger";
+
+                                        if (difference == 0)
+                                        {
+                                            difference = 0;
+                                            text = "text-danger";
+                                        }
+                                    }
+
+                                    <td>
+                                        <div class="@text">
+                                            @String.Format("{0:0.00}", difference)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown dropleft">
+                                            <a class="text-muted"
+                                               href="#"
+                                               role="button"
+                                               id="dropdownMenu"
+                                               data-toggle="dropdown"
+                                               aria-haspopup="true"
+                                               aria-expanded="false">
+                                                <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+                                            </a>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                                <a asp-action="Index"
+                                                   asp-controller="Expense"
+                                                   asp-route-category="@item.CategoryId"
+                                                   class="dropdown-item">
+                                                    View Expenses
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
                             }
                         }
+                    </tbody>
+                </table>
 
-                        <td>
-                            <div class="@text">
-                                @String.Format("{0:0.00}", difference)
+                <div class="modal fade"
+                     id="budgetModal"
+                     tabindex="-1"
+                     role="dialog"
+                     aria-labelledby="budgetModal"
+                     aria-hidden="true">
+
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete this budget?</h5>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                        </td>
-                        <td>
-                            <div class="dropdown dropleft">
-                                <a class="text-muted"
-                                   href="#"
-                                   role="button"
-                                   id="dropdownMenu"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true"
-                                   aria-expanded="false">
-                                    <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+
+                            <div class="modal-body">
+                                <p>Your budget for @DateTime.Now.ToString("MMMM") @DateTime.Now.Year</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                                <a asp-action="Delete"
+                                   asp-route-id="@budgetId"
+                                   class="btn btn-danger">
+                                    Delete
                                 </a>
-
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                                    <a asp-action="Index"
-                                       asp-controller="Expense"
-                                       asp-route-category="@item.CategoryId"
-                                       class="dropdown-item">
-                                        View Expenses
-                                    </a>
-                                </div>
                             </div>
-                        </td>
-                    </tr>
-                }
+                        </div>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
+            else
+            {
+                <p style="font-size: 175%">Uh oh... You don't have a budget setup for this month :(</p>
 
-    <div class="modal fade"
-         id="budgetModal"
-         tabindex="-1"
-         role="dialog"
-         aria-labelledby="budgetModal"
-         aria-hidden="true">
-
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete this budget?</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <p>Your budget for @DateTime.Now.ToString("MMMM") @DateTime.Now.Year</p>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-                    <a asp-action="Delete"
-                       asp-route-id="@budgetId"
-                       class="btn btn-danger">
-                        Delete
-                    </a>
-                </div>
-            </div>
+                <a asp-action="Add"
+                   class="btn btn-primary">
+                    Setup budget for this month
+                </a>
+            }
         </div>
     </div>
-}
-else
-{
-    <p style="font-size: 175%">Uh oh... You don't have a budget setup for this month :(</p>
-
-    <a asp-action="Add"
-       class="btn btn-primary">
-        Setup budget for this month
-    </a>
-}
+</div>
 

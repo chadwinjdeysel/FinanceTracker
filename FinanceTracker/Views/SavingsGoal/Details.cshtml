@@ -9,165 +9,175 @@
     < Back to Goals
 </a>
 
-<div class="mt-3 row mx-1 justify-content-between">
-    <div>
-        <span>Total</span>
-        <h3>R @Model.SavingsGoal.Amount</h3>
-    </div>
+<div class="my-5">
+    <div class="card col-11 mx-auto shadow-sm">
+        <div class="card-body">
 
-    @if (Model.SavingsGoal.HasDeadline)
-    {
-        <div class="text-danger">
-            <span>Deadline</span>
-            <h3>@Model.SavingsGoal.Deadline.ToShortDateString()</h3>
-        </div>
-    }
-</div>
-
-<div class="progress my-3">
-    <div class="progress-bar"
-         role="progressbar"
-         aria-valuenow="@Model.Progress"
-         aria-valuemin="0"
-         aria-valuemax="100"
-         style="width: @Model.Progress%">
-    </div>
-</div>
-
-<div class="my-3">
-    <a asp-action="Add"
-       asp-controller="Savings"
-       asp-route-savingsGoalId="@Model.SavingsGoal.Id"
-       asp-route-type="0"
-       style="width: 50px"
-       class="btn btn-primary my-2">
-        +
-    </a>
-
-    <a asp-action="Add"
-       asp-controller="Savings"
-       asp-route-savingsGoalId="@Model.SavingsGoal.Id"
-       asp-route-type="1"
-       style="width: 50px"
-       class="btn btn-outline-danger my-2">
-        -
-    </a>
-</div>
-
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th></th>
-        </tr>
-    </thead>
-
-    @if (Model.SavingsGoal.Savings.Any())
-    {
-<tbody>
-    @foreach (var item in Model.SavingsGoal.Savings)
-    {
-        string modalName = "a" + item.Id.ToString() + "Modal";
-
-        <tr>
-            <td>@item.Date.ToShortDateString()</td>
-            @{
-                var type = item.Type == FinanceTracker.Models.Type.Addition ? "text-primary" : "text-danger";
-                var symbol = item.Type == FinanceTracker.Models.Type.Addition ? "+" : "-";
-            }
-
-            <td class="@type">
-                @item.Type
-            </td>
-
-            <td class="@type">
-                @symbol R @item.Amount
-            </td>
-
-            <td>
-                <div class="dropdown dropleft">
-                    <a class="text-muted"
-                       href="#"
-                       role="button"
-                       id="dropdownMenu"
-                       data-toggle="dropdown"
-                       aria-haspopup="true"
-                       aria-expanded="false">
-                        <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
-                    </a>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                        <a asp-action="Edit"
-                           asp-controller="Savings"
-                           asp-route-id="@item.Id"
-                           class="dropdown-item">
-                            Edit
-                        </a>
-
-                        <a href="#"
-                           role="button"
-                           data-toggle="modal"
-                           data-target="#@modalName"
-                           class="dropdown-item">
-                            Delete
-                        </a>
-                    </div>
+            <div class="mt-3 row mx-1 justify-content-between">
+                <div>
+                    <span>Total</span>
+                    <h3>R @Model.SavingsGoal.Amount</h3>
                 </div>
-            </td>
-        </tr>
 
-        <div class="modal fade"
-             id="@modalName"
-             tabindex="-1"
-             role="dialog"
-             aria-labelledby="@modalName"
-             aria-hidden="true">
-
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Delete this savings transaction?</h5>
-
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                @if (Model.SavingsGoal.HasDeadline)
+                {
+                    <div class="text-danger">
+                        <span>Deadline</span>
+                        <h3>@Model.SavingsGoal.Deadline.ToShortDateString()</h3>
                     </div>
+                }
+            </div>
 
-                    <div class="modal-body">
-                        <div class="row justify-content-between col-12">
-                            <h4>@item.Amount</h4>
-                            <h4>@item.Type.ToString()</h4>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-                        <a asp-action="Delete"
-                           asp-controller="Savings"
-                           asp-route-id="@item.Id"
-                           class="btn btn-danger">
-                            Delete
-                        </a>
-                    </div>
+            <div class="progress my-3">
+                <div class="progress-bar"
+                     role="progressbar"
+                     aria-valuenow="@Model.Progress"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     style="width: @Model.Progress%">
                 </div>
             </div>
-        </div>
-    }
-</tbody>
-       
-    }
-    else
-    {
-        <tbody>
-            <tr>
-                <td>Nothings was found</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
 
-    }
-</table>
+            <div class="my-3">
+                <a asp-action="Add"
+                   asp-controller="Savings"
+                   asp-route-savingsGoalId="@Model.SavingsGoal.Id"
+                   asp-route-type="0"
+                   style="width: 50px"
+                   class="btn btn-primary my-2">
+                    +
+                </a>
+
+                <a asp-action="Add"
+                   asp-controller="Savings"
+                   asp-route-savingsGoalId="@Model.SavingsGoal.Id"
+                   asp-route-type="1"
+                   style="width: 50px"
+                   class="btn btn-outline-danger my-2">
+                    -
+                </a>
+            </div>
+
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                @if (Model.SavingsGoal.Savings.Any())
+                {
+                    <tbody>
+                        @foreach (var item in Model.SavingsGoal.Savings)
+                        {
+                            string modalName = "a" + item.Id.ToString() + "Modal";
+
+                            <tr>
+                                <td>@item.Date.ToShortDateString()</td>
+                                @{
+                                    var type = item.Type == FinanceTracker.Models.Type.Addition ? "text-primary" : "text-danger";
+                                    var symbol = item.Type == FinanceTracker.Models.Type.Addition ? "+" : "-";
+                                }
+
+                                <td class="@type">
+                                    @item.Type
+                                </td>
+
+                                <td class="@type">
+                                    @symbol R @item.Amount
+                                </td>
+
+                                <td>
+                                    <div class="dropdown dropleft">
+                                        <a class="text-muted"
+                                           href="#"
+                                           role="button"
+                                           id="dropdownMenu"
+                                           data-toggle="dropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false">
+                                            <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                            <a asp-action="Edit"
+                                               asp-controller="Savings"
+                                               asp-route-id="@item.Id"
+                                               class="dropdown-item">
+                                                Edit
+                                            </a>
+
+                                            <a href="#"
+                                               role="button"
+                                               data-toggle="modal"
+                                               data-target="#@modalName"
+                                               class="dropdown-item">
+                                                Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <div class="modal fade"
+                                 id="@modalName"
+                                 tabindex="-1"
+                                 role="dialog"
+                                 aria-labelledby="@modalName"
+                                 aria-hidden="true">
+
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete this savings transaction?</h5>
+
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="row justify-content-between col-12">
+                                                <h4>@item.Amount</h4>
+                                                <h4>@item.Type.ToString()</h4>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                                            <a asp-action="Delete"
+                                               asp-controller="Savings"
+                                               asp-route-id="@item.Id"
+                                               class="btn btn-danger">
+                                                Delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </tbody>
+
+                }
+                else
+                {
+                    <tbody>
+                        <tr>
+                            <td>Nothings was found</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+
+                }
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
