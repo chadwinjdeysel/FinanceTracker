@@ -138,6 +138,7 @@ namespace FinanceTracker.Data
         {
             var expenses = await _context.Expenses
                 .Include(x => x.Category)
+                .Where(x => x.Date.Month == DateTime.Now.Month)
                 .OrderByDescending(x => x.Date)
                 .Take(5)
                 .ToListAsync();

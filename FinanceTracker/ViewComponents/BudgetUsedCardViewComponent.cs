@@ -46,7 +46,8 @@ namespace FinanceTracker.ViewComponents
                 PercentageUsed = percentage,
                 Chart = GenerateChart(percentage),
                 CategoriesInBudget = budget.Where(x => x.Amount > 0).Count(),
-                CategoriesOverBudget = categroriesOverBudget
+                CategoriesOverBudget = categroriesOverBudget,
+                BudgetId = budget.Select(x => x.BudgetId).FirstOrDefault()
             };
 
             return View(model);

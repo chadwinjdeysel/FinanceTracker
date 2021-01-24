@@ -2,8 +2,36 @@
 
 <div class="card h-100 shadow-sm">
 
+
     @if (Model.CategoriesInBudget > 0)
     {
+        <div class="dropdown dropleft card-menu">
+            <a class="text-muted"
+               href="#"
+               role="button"
+               id="dropdownMenu"
+               data-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false">
+                <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+            </a>
+
+            <div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenu">
+                <a asp-controller="Budget"
+                   asp-action="Index"
+                   class="dropdown-item">
+                    View Details
+                </a>
+
+                <a asp-controller="Budget"
+                   asp-action="Edit"
+                   asp-route-id="@Model.BudgetId"
+                   class="dropdown-item">
+                    Edit Budget
+                </a>
+            </div>
+        </div>
+
         <div class="card-body">
 
             <p class="text-larger text-center my-0">Budget Used</p>
@@ -40,20 +68,23 @@
     else
     {
         <div class="card-body text-center">
-            <p class="text-center text-larger">No Budget has been set for this month</p>
+            <p class="text-muted m-0">No budget has been set for this month</p>
 
             <a asp-action="Add"
                asp-controller="Budget"
-               class="text-muted ">
-                add one here
+               class="text-larger">
+                create budget for @DateTime.Now.ToString("MMMM")
             </a>
         </div>
     }
 
 </div>
 
-<script>
+@if (Model.CategoriesInBudget > 0)
+{
+    <script>
     var ctx = document.getElementById('budgetUsedChart').getContext('2d');
     var chart = new Chart(ctx, @Html.Raw(Json.Serialize(Model.Chart)))
-        
-</script>
+
+    </script>
+}

@@ -6,7 +6,7 @@
 
     @if (Model.SavingsGoal.Id != Guid.Empty)
     {
-        <div class="dropdown dropleft card-menu">
+        <div class="dropdown dropleft card-menu ">
             <a class="text-muted"
                href="#"
                role="button"
@@ -17,7 +17,7 @@
                 <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
             </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+            <div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenu">
                 <a asp-action="Add"
                    asp-controller="Savings"
                    asp-route-savingsGoalId="@Model.SavingsGoal.Id"
@@ -34,6 +34,15 @@
                    role="button"
                    class="dropdown-item">
                     Subtract from Savings
+                </a>
+
+
+                <div class="dropdown-divider"></div>
+
+                <a asp-action="Goals"
+                   asp-controller="SavingsGoal"
+                   class="dropdown-item">
+                    Manage Savings Goals
                 </a>
             </div>
         </div>
@@ -78,12 +87,12 @@
     else
     {
         <div class="card-body text-center">
-            <p class="text-center text-larger">No Savings Goals were found</p>
+            <p class="text-muted m-0">No savings goals were found</p>
 
             <a asp-action="Add"
                asp-controller="SavingsGoal"
-               class="text-muted ">
-                add one here
+               class="text-larger">
+                create your first goal
             </a>
         </div>
     }

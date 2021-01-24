@@ -12,5 +12,6 @@ namespace FinanceTracker.ViewModels
         public double PercentageUsed { get; set; }
         public int CategoriesInBudget { get; set; }
         public int CategoriesOverBudget { get; set; }
+        public Guid BudgetId { get; set; }
     }
 }

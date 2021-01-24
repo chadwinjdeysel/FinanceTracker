@@ -2,7 +2,48 @@
 
 @model ExpenseSavingsViewModel
 
+@{
+    bool hasSavings = false;
+
+    foreach (var dataset in Model.Chart.data.datasets)
+    {
+        foreach (var saving in dataset.data)
+        {
+            if (saving > 0)
+                hasSavings = true;
+        }
+    }
+
+}
+
 <div class="card h-100 shadow-sm">
+
+    <div class="dropdown dropleft card-menu">
+        <a class="text-muted"
+           href="#"
+           role="button"
+           id="dropdownMenu"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+            <span class="oi oi-ellipses" style="transform: rotate(90deg)"></span>
+        </a>
+
+        <div class="dropdown-menu shadow-sm" aria-labelledby="dropdownMenu">
+            <a asp-controller="SavingsGoal"
+               asp-action="Goals"
+               class="dropdown-item">
+                Savings Tracker
+            </a>
+
+            <a asp-controller="Expense"
+               asp-action="Index"
+               class="dropdown-item">
+                Track Expenses
+            </a>
+        </div>
+    </div>
+
     <div class="card-body">
         <div class="row">
             <div class="col-3" style="border-right: 2px solid var(--gray)">
@@ -19,16 +60,37 @@
                 <h2 class="text-center mt-2">R @String.Format("{0:0.00}", Model.TotalSaved)</h2>
             </div>
 
-            <div class="col-6">
-                <div><canvas id="savingsChart"></canvas></div>
-            </div>
+            @if (hasSavings)
+            {
+                <div class="col-6">
+                    <div><canvas id="savingsChart"></canvas></div>
+                </div>
+            }
+            else
+            {
+                <div class="col-6">
+                    <div class="text-center">
+                        <p class="m-0 text-muted">
+                            No savings were found for the past 3 months
+                        </p>
+
+                        <a asp-controller="Savings"
+                           class="text-larger">
+                            start recording savings
+                        </a>
+                    </div>
+                </div>
+            }
         </div>
-        
+
 
     </div>
 </div>
 
-<script>
-    var ctx = document.getElementById('savingsChart').getContext('2d');
-    var chart = new Chart(ctx, @Html.Raw(Json.Serialize(Model.Chart)));
-</script>
+@if (hasSavings)
+{
+    <script>
+        var ctx = document.getElementById('savingsChart').getContext('2d');
+        var chart = new Chart(ctx, @Html.Raw(Json.Serialize(Model.Chart)));
+    </script>
+}
