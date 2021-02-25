@@ -25,11 +25,12 @@ namespace FinanceTracker.ViewComponents
 
             var savings = await _repo.GetList<Saving>();
 
-            savings = savings.Where(x => x.Date.Year == DateTime.Now.Year && x.Date.Month == x.Date.Month).AsQueryable();
+            savings = savings.Where(x => x.Date.ToString("yyyy/MM") == DateTime.Now.ToString("yyy/MM"))
+                .AsQueryable();
 
             var model = new ExpenseSavingsViewModel()
             {
-                TotalExpenses = expenses.Where(x => x.Date.Year == DateTime.Now.Year && x.Date.Month == x.Date.Month)
+                TotalExpenses = expenses.Where(x => x.Date.ToString("yyyy/MM") == DateTime.Now.ToString("yyyy/MM"))
                     .Select(x => x.Amount)
                     .Sum(),
                 TotalSaved = (savings.Where(x => x.Type == Models.Type.Addition).Select(x => x.Amount).Sum()) - (savings.Where(x => x.Type == Models.Type.Subtraction).Select(x => x.Amount).Sum()),
