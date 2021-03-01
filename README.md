@@ -8,7 +8,11 @@ This app was made using [.Net Core 3.1](https://dotnet.microsoft.com) and [SQLit
 ```
 $ git clone https://github.com/chadwinjdeysel/FinanceTracker.git
 ```
-Oprn the project folder in Powershell
+2. Open the solution folder in Powershell
+3. Enter the project folder
+```
+ cd FinanceTracker
+```
 Run the project
 ```
 dotnet run
